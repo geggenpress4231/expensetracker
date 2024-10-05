@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ExpensePage from './pages/ExpensePage';
 import SummaryPage from './pages/SummaryPage';
-import { ExpenseProvider } from './context/ExpenseContext';  // ExpenseProvider wrapping the app
-import { ModalProvider } from './context/ModalContext';  // ModalProvider for global modals
-import ExpenseFormModal from './components/ExpenseFormModal'; // Global modal
+import { ExpenseProvider } from './context/ExpenseContext'; 
+import { ModalProvider } from './context/ModalContext'; 
+import ExpenseFormModal from './components/ExpenseFormModal'; 
 
 function App() {
   return (
