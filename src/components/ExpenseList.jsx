@@ -1,8 +1,22 @@
-import React, { useContext } from "react";
-import { ExpenseContext } from "../context/ExpenseContext";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteExpense, fetchExpenses } from "../actions/expenseActions";  // Import fetchExpenses action
 
 export default function ExpenseList({ onEditExpense }) {
-  const { expenses, deleteExpense } = useContext(ExpenseContext);
+  const dispatch = useDispatch();
+
+  // Access expenses state from Redux
+  const expenses = useSelector((state) => state.expenses.expenses);
+
+  // Fetch expenses from JSON server when component loads
+  useEffect(() => {
+    dispatch(fetchExpenses());  // Dispatch fetchExpenses to load data from the server
+  }, [dispatch]);
+
+  // Handle delete action
+  const handleDelete = (id) => {
+    dispatch(deleteExpense(id));  // Dispatch the deleteExpense action
+  };
 
   return (
     <div>
@@ -27,8 +41,8 @@ export default function ExpenseList({ onEditExpense }) {
                 <td>{expense.description}</td>
                 <td>{expense.amount}</td>
                 <td>
-                  <button onClick={() => onEditExpense(expense)}>Edit</button> 
-                  <button onClick={() => deleteExpense(expense.id)}>Delete</button>
+                  <button onClick={() => onEditExpense(expense)}>Edit</button>
+                  <button onClick={() => handleDelete(expense.id)}>Delete</button> {/* Handle delete */}
                 </td>
               </tr>
             ))}

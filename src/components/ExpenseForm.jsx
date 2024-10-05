@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import { ExpenseContext } from "../context/ExpenseContext";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from 'react-redux';  // Import useDispatch from Redux
+import { addExpense, updateExpense } from '../actions/expenseActions';  // Import Redux actions
 
 export default function ExpenseForm({ onSubmit, expense }) {
-  const { addExpense, updateExpense } = useContext(ExpenseContext);
+  const dispatch = useDispatch();  // Initialize dispatch from Redux
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
@@ -41,14 +42,15 @@ export default function ExpenseForm({ onSubmit, expense }) {
       };
 
       if (expense) {
-        // If editing an expense, update it
-        updateExpense(newExpense);
+        // If editing an expense, dispatch the update action
+        dispatch(updateExpense(newExpense));
       } else {
-        // Otherwise, add a new expense
-        addExpense(newExpense);
+        // Otherwise, dispatch the add action
+        dispatch(addExpense(newExpense));
       }
 
       onSubmit();  // Close modal after adding/updating
+
       // Clear form fields
       setDescription("");
       setAmount("");
@@ -106,7 +108,6 @@ export default function ExpenseForm({ onSubmit, expense }) {
         </select>
         {errors.category && <p style={{ color: "red" }}>{errors.category}</p>}
     </div>
-
 
       <button type="submit" style={{ marginTop: "20px" }}>Submit</button>
     </form>

@@ -6,6 +6,8 @@ export default function BarChart({ data }) {
   const tooltipRef = useRef();
 
   useEffect(() => {
+    if (data.length === 0) return;  // If no data, stop rendering the chart
+
     const svg = d3.select(svgRef.current);
     const tooltip = d3.select(tooltipRef.current);
     const width = 600;
@@ -97,6 +99,11 @@ export default function BarChart({ data }) {
     bars.exit().remove();
 
   }, [data]);
+
+  // Fallback UI when there is no data
+  if (data.length === 0) {
+    return <p style={{ textAlign: 'center', fontSize: '16px', color: 'gray' }}>No data available to display.</p>;
+  }
 
   return (
     <>

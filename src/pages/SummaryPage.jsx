@@ -1,5 +1,5 @@
-import React, { useMemo, useState, useContext } from 'react';
-import { ExpenseContext } from '../context/ExpenseContext';
+import React, { useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';  // Import useSelector to access Redux state
 import BarChart from '../components/BarChart';
 import { Select, Card, Row, Col } from 'antd';
 import HamburgerMenu from '../components/HamburgerMenu';
@@ -7,7 +7,8 @@ import HamburgerMenu from '../components/HamburgerMenu';
 const { Option } = Select;
 
 export default function SummaryPage() {
-  const { expenses } = useContext(ExpenseContext);
+  // Access expenses from Redux state
+  const expenses = useSelector((state) => state.expenses.expenses);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   // Calculate total expenses
@@ -30,7 +31,7 @@ export default function SummaryPage() {
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
-      <HamburgerMenu/>
+      <HamburgerMenu />
       <h1>Summary Page</h1>
 
       <Row gutter={16}>

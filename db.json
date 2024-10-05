@@ -3,7 +3,7 @@
     {
       "id": "2",
       "description": "Bus fare",
-      "amount": 30,
+      "amount": 32,
       "date": "2024-01-02",
       "category": "Transport"
     },
