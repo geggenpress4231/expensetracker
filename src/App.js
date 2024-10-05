@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ExpensePage from './pages/ExpensePage';
+import SummaryPage from './pages/SummaryPage';
+import { ExpenseProvider } from './context/ExpenseContext';  // ExpenseProvider wrapping the app
+import { ModalProvider } from './context/ModalContext';  // ModalProvider for global modals
+import ExpenseFormModal from './components/ExpenseFormModal'; // Global modal
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ExpenseProvider>
+      <ModalProvider>
+        <Router>
+          <div>
+            <Routes>
+              <Route path="/expense-tracker" element={<ExpensePage />} />
+              <Route path="/summary" element={<SummaryPage />} />
+              <Route path="/" element={<ExpensePage />} />
+            </Routes>
+
+            {/* Global Expense Form Modal */}
+            <ExpenseFormModal />
+          </div>
+        </Router>
+      </ModalProvider>
+    </ExpenseProvider>
   );
 }
 
