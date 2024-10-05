@@ -3,7 +3,7 @@
     {
       "id": "2",
       "description": "Bus fare",
-      "amount": 32,
+      "amount": 30,
       "date": "2024-01-02",
       "category": "Transport"
     },
@@ -155,11 +155,11 @@
       "category": "Food"
     },
     {
-      "id": "1728135034277",
-      "description": "airfare",
-      "amount": 60,
-      "date": "2024-10-04",
-      "category": "Transport"
+      "id": 1728147201001,
+      "description": "osmows",
+      "amount": 39,
+      "date": "2024-10-06",
+      "category": "Food"
     }
   ]
 }

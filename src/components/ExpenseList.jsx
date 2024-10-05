@@ -1,26 +1,54 @@
+// components/ExpenseList.jsx
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteExpense, fetchExpenses } from "../actions/expenseActions";  // Import fetchExpenses action
+import { deleteExpense, fetchExpenses } from "../actions/expenseActions";  
 
 export default function ExpenseList({ onEditExpense }) {
   const dispatch = useDispatch();
-
-  // Access expenses state from Redux
+  
+  // Get expenses from Redux store
   const expenses = useSelector((state) => state.expenses.expenses);
 
-  // Fetch expenses from JSON server when component loads
+  // Get search parameters from Redux store
+  const searchParams = useSelector((state) => state.search);
+
+  // Fetch expenses when the component loads
   useEffect(() => {
-    dispatch(fetchExpenses());  // Dispatch fetchExpenses to load data from the server
+    dispatch(fetchExpenses());  
   }, [dispatch]);
 
   // Handle delete action
   const handleDelete = (id) => {
-    dispatch(deleteExpense(id));  // Dispatch the deleteExpense action
+    dispatch(deleteExpense(id));  
   };
+
+  // Filter expenses based on searchParams
+  const filteredExpenses = expenses.filter((expense) => {
+    const matchesDescription = searchParams.description
+      ? expense.description.toLowerCase().includes(searchParams.description.toLowerCase())
+      : true;
+
+    const matchesCategory = searchParams.category
+      ? expense.category.toLowerCase().includes(searchParams.category.toLowerCase())
+      : true;
+
+    const matchesAmount = searchParams.amount
+      ? expense.amount === parseFloat(searchParams.amount)
+      : true;
+
+    const matchesDate = searchParams.date
+      ? expense.date === searchParams.date
+      : true;
+
+    return matchesDescription && matchesCategory && matchesAmount && matchesDate;
+  });
+
+  // Sort expenses by date (most recent first)
+  const sortedExpenses = [...filteredExpenses].sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
     <div>
-      {expenses.length === 0 ? (
+      {sortedExpenses.length === 0 ? (
         <p>No expenses recorded.</p>
       ) : (
         <table>
@@ -34,7 +62,7 @@ export default function ExpenseList({ onEditExpense }) {
             </tr>
           </thead>
           <tbody>
-            {expenses.map((expense) => (
+            {sortedExpenses.map((expense) => (
               <tr key={expense.id}>
                 <td>{expense.date}</td>
                 <td>{expense.category}</td>
@@ -42,7 +70,7 @@ export default function ExpenseList({ onEditExpense }) {
                 <td>{expense.amount}</td>
                 <td>
                   <button onClick={() => onEditExpense(expense)}>Edit</button>
-                  <button onClick={() => handleDelete(expense.id)}>Delete</button> {/* Handle delete */}
+                  <button onClick={() => handleDelete(expense.id)}>Delete</button>
                 </td>
               </tr>
             ))}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';  // Import useDispatch from Redux
 import { addExpense, updateExpense } from '../actions/expenseActions';  // Import Redux actions
+import { AutoComplete } from 'antd';  // Import Ant Design AutoComplete
 
 export default function ExpenseForm({ onSubmit, expense }) {
   const dispatch = useDispatch();  // Initialize dispatch from Redux
@@ -9,16 +10,31 @@ export default function ExpenseForm({ onSubmit, expense }) {
   const [date, setDate] = useState("");
   const [category, setCategory] = useState("");
   const [errors, setErrors] = useState({});
+  const [suggestions, setSuggestions] = useState([]);  // Suggestions for autocomplete
 
-  // Pre-fill form with expense data if editing
+  const LOCAL_STORAGE_KEY = 'expenseDescriptions';
+
+  // Load saved descriptions from localStorage when the component loads
+  useEffect(() => {
+    const savedDescriptions = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+    setSuggestions(savedDescriptions);
+  }, []);
+
+  // Pre-fill form with expense data if editing, or reset fields when adding a new expense
   useEffect(() => {
     if (expense) {
       setDescription(expense.description);
       setAmount(expense.amount);
       setDate(expense.date);
       setCategory(expense.category);
+    } else {
+      // If there's no existing expense (i.e., adding a new expense), reset the fields
+      setDescription("");
+      setAmount("");
+      setDate("");
+      setCategory("");
     }
-  }, [expense]);
+  }, [expense]);  // This effect runs when 'expense' changes
 
   const validateForm = () => {
     const newErrors = {};
@@ -41,17 +57,21 @@ export default function ExpenseForm({ onSubmit, expense }) {
         category
       };
 
+      const savedDescriptions = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+      if (!savedDescriptions.includes(description)) {
+        savedDescriptions.push(description);
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedDescriptions));  // Save updated descriptions to localStorage
+      }
+
       if (expense) {
-        // If editing an expense, dispatch the update action
         dispatch(updateExpense(newExpense));
       } else {
-        // Otherwise, dispatch the add action
         dispatch(addExpense(newExpense));
       }
 
       onSubmit();  // Close modal after adding/updating
 
-      // Clear form fields
+      // Clear form fields after submit
       setDescription("");
       setAmount("");
       setDate("");
@@ -63,11 +83,19 @@ export default function ExpenseForm({ onSubmit, expense }) {
     <form onSubmit={handleSubmit} className="expense-form">
       <div>
         <label>Description:</label>
-        <input
-          type="text"
+        {/* AutoComplete with suggestions when input is empty */}
+        <AutoComplete
+          options={suggestions.map((desc) => ({ value: desc }))}  // Format suggestions for AutoComplete
+          style={{ width: '100%' }}
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={setDescription}
           placeholder="Enter description"
+          allowClear
+          filterOption={(inputValue, option) =>
+            inputValue
+              ? option.value.toLowerCase().startsWith(inputValue.toLowerCase())  // Show filtered suggestions based on input
+              : true  // Show all suggestions if input is empty
+          }
         />
         {errors.description && <p style={{ color: "red" }}>{errors.description}</p>}
       </div>

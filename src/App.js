@@ -4,7 +4,9 @@ import { Provider } from 'react-redux';
 import store from './store/store';  // Import the Redux store
 import ExpensePage from './pages/ExpensePage';
 import SummaryPage from './pages/SummaryPage';
-import ExpenseFormModal from './components/ExpenseFormModal'; // Global modal
+import ExpenseFormModal from './components/ExpenseFormModal'; 
+
+
 
 function App() {
   return (
