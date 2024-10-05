@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Modal } from 'antd';  
-import { useDispatch, useSelector } from 'react-redux';  // Use Redux hooks
+import { useDispatch, useSelector } from 'react-redux';  
 import ExpenseList from "../components/ExpenseList";
 import ExpenseForm from "../components/ExpenseForm";
 import HamburgerMenu from "../components/HamburgerMenu";
-import { showModal, hideModal } from "../actions/modalActions";  // Import modal actions
+import { showModal, hideModal } from "../actions/modalActions";  
 
 export default function ExpensePage() {
   const dispatch = useDispatch();
@@ -15,12 +15,12 @@ export default function ExpensePage() {
 
   
   const showModalHandler = (expense = null) => {
-    dispatch(showModal(expense));  // Dispatch the action to show the modal with optional expense
+    dispatch(showModal(expense));  
   };
 
   // Handle modal cancellation
   const handleCancel = () => {
-    dispatch(hideModal());  // Dispatch the action to hide the modal
+    dispatch(hideModal());  
   };
 
   return (
