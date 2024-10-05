@@ -146,6 +146,20 @@
       "amount": 12,
       "date": "2024-10-10",
       "category": "Food"
+    },
+    {
+      "id": "1728134856469",
+      "description": "kebab place",
+      "amount": 100,
+      "date": "2024-10-05",
+      "category": "Food"
+    },
+    {
+      "id": "1728135034277",
+      "description": "airfare",
+      "amount": 60,
+      "date": "2024-10-04",
+      "category": "Transport"
     }
   ]
 }

@@ -3,27 +3,37 @@ import * as d3 from 'd3';
 
 export default function BarChart({ data }) {
   const svgRef = useRef();
-  const tooltipRef = useRef(); // Tooltip container
+  const tooltipRef = useRef();
 
   useEffect(() => {
     const svg = d3.select(svgRef.current);
     const tooltip = d3.select(tooltipRef.current);
-    const width = 500;
-    const height = 300;
+    const width = 600;
+    const height = 400;
     const margin = { top: 20, right: 20, bottom: 50, left: 60 };
 
     // Clear previous chart
     svg.selectAll("*").remove();
 
+    // Group expenses by category and aggregate amounts
+    const categories = Array.from(new Set(data.map(d => d.category)));
+    const stackedData = categories.map(category => ({
+      category,
+      totalAmount: d3.sum(data.filter(d => d.category === category), d => d.amount),
+      expenses: data.filter(d => d.category === category),
+    }));
+
     // Scales
     const xScale = d3.scaleBand()
-      .domain(data.map(d => d.category))
+      .domain(stackedData.map(d => d.category))
       .range([margin.left, width - margin.right])
       .padding(0.3);
 
     const yScale = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.amount)])
+      .domain([0, d3.max(stackedData, d => d.totalAmount)])
       .range([height - margin.bottom, margin.top]);
+
+    const barColor = '#4682B4';  // Single color for bars
 
     // Axes
     const xAxis = d3.axisBottom(xScale);
@@ -40,50 +50,57 @@ export default function BarChart({ data }) {
       .attr('transform', `translate(${margin.left}, 0)`)
       .call(yAxis);
 
-    // Bars
-    svg.selectAll('.bar')
-      .data(data)
-      .enter()
+    // Bind data
+    const categoryGroups = svg.selectAll('.category')
+      .data(stackedData);
+
+    // Handle Enter + Update
+    const bars = categoryGroups.enter()
+      .append('g')
+      .attr('class', 'category')
+      .attr('transform', d => `translate(${xScale(d.category)}, 0)`)
+      .merge(categoryGroups)
+      .selectAll('rect')
+      .data(d => d.expenses);
+
+    // Enter new elements
+    bars.enter()
       .append('rect')
-      .attr('x', d => xScale(d.category))
-      .attr('y', d => yScale(d.amount))
+      .attr('x', 0)
+      .attr('y', (d, i, nodes) => {
+        const previousExpenses = nodes.slice(0, i).map(n => d3.select(n).datum().amount);
+        const cumulativeSum = d3.sum(previousExpenses);
+        return yScale(cumulativeSum + d.amount);
+      })
       .attr('width', xScale.bandwidth())
       .attr('height', d => height - margin.bottom - yScale(d.amount))
-      .attr('fill', 'steelblue')
+      .attr('fill', barColor)
       .on("mouseover", function(event, d) {
-        // Show tooltip on hover
-        d3.select(this)
-          .transition()
-          .duration(100)
-          .attr('fill', 'orange');
-
-        const [x, y] = d3.pointer(event);
+        d3.select(this).transition().duration(100).attr('fill', 'orange');
+        const [x, y] = d3.pointer(event, svg.node());
         tooltip
           .style("visibility", "visible")
-          .style("left", `${x + 50}px`)
-          .style("top", `${y + 20}px`)
+          .style("left", `${x + margin.left}px`)
+          .style("top", `${y + margin.top}px`)
           .html(`<strong>${d.category}</strong><br/>Description: ${d.description}<br/>Amount: $${d.amount}`);
       })
       .on("mousemove", function(event) {
-        const [x, y] = d3.pointer(event);
-        tooltip
-          .style("left", `${x + 50}px`)
-          .style("top", `${y + 20}px`);
+        const [x, y] = d3.pointer(event, svg.node());
+        tooltip.style("left", `${x + margin.left}px`).style("top", `${y + margin.top}px`);
       })
       .on("mouseout", function() {
-        d3.select(this)
-          .transition()
-          .duration(100)
-          .attr('fill', 'steelblue');
-        
+        d3.select(this).transition().duration(100).attr('fill', barColor);
         tooltip.style("visibility", "hidden");
       });
+
+    // Remove elements that are no longer in the data
+    bars.exit().remove();
 
   }, [data]);
 
   return (
     <>
-      <svg ref={svgRef} width={500} height={300}></svg>
+      <svg ref={svgRef} width={600} height={400}></svg>
       <div
         ref={tooltipRef}
         style={{
@@ -93,6 +110,7 @@ export default function BarChart({ data }) {
           borderRadius: '5px',
           pointerEvents: 'none',
           visibility: 'hidden',
+          fontSize: '12px',
         }}
       />
     </>

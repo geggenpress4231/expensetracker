@@ -15,14 +15,12 @@ export default function SummaryPage() {
     return expenses.reduce((total, expense) => total + expense.amount, 0);
   }, [expenses]);
 
-  // Filter expenses by selected categories
+  // Filter and aggregate expenses by selected categories
   const filteredExpenses = useMemo(() => {
     if (selectedCategories.length === 0 || selectedCategories.includes("All")) {
       return expenses;
     }
-    return expenses.filter((expense) =>
-      selectedCategories.includes(expense.category)
-    );
+    return expenses.filter((expense) => selectedCategories.includes(expense.category));
   }, [selectedCategories, expenses]);
 
   // Unique categories for the dropdown
