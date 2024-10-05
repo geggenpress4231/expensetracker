@@ -135,15 +135,15 @@
     },
     {
       "id": "60",
-      "date": "2024-02-15",
-      "category": "Entertainment",
       "description": "Movie tickets",
-      "amount": 30
+      "amount": 30.23,
+      "date": "2024-02-15",
+      "category": "Entertainment"
     },
     {
       "id": "1728086706277",
       "description": "osmow",
-      "amount": 12,
+      "amount": 12.34,
       "date": "2024-10-10",
       "category": "Food"
     },
@@ -155,9 +155,9 @@
       "category": "Food"
     },
     {
-      "id": 1728147201001,
+      "id": "1728147201001",
       "description": "osmows",
-      "amount": 39,
+      "amount": 39.48,
       "date": "2024-10-06",
       "category": "Food"
     }

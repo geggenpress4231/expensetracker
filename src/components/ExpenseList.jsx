@@ -1,55 +1,92 @@
-// components/ExpenseList.jsx
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteExpense, fetchExpenses } from "../actions/expenseActions";  
+import { deleteExpense, fetchExpenses } from "../actions/expenseActions";
+import DateFilter from "./DateFilter";
+import CategoryFilter from "./CategoryFilter";
+import moment from 'moment';
 
 export default function ExpenseList({ onEditExpense }) {
   const dispatch = useDispatch();
-  
-  // Get expenses from Redux store
-  const expenses = useSelector((state) => state.expenses.expenses);
 
-  // Get search parameters from Redux store
+  const expenses = useSelector((state) => state.expenses.expenses);
   const searchParams = useSelector((state) => state.search);
 
-  // Fetch expenses when the component loads
+  const [selectedDateRange, setSelectedDateRange] = useState([null, null]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   useEffect(() => {
-    dispatch(fetchExpenses());  
+    dispatch(fetchExpenses());
   }, [dispatch]);
 
-  // Handle delete action
   const handleDelete = (id) => {
-    dispatch(deleteExpense(id));  
+    dispatch(deleteExpense(id));
   };
 
-  // Filter expenses based on searchParams
+  // Date range comparison logic
+  const matchesDateRange = (expenseDate) => {
+    if (!selectedDateRange || (selectedDateRange[0] === null && selectedDateRange[1] === null)) {
+      return true; // No date range selected
+    }
+    
+    const [startDate, endDate] = selectedDateRange;
+    const expenseMoment = moment(expenseDate, "YYYY-MM-DD");
+    
+    if (startDate && endDate) {
+      return expenseMoment.isBetween(moment(startDate), moment(endDate), 'days', '[]');
+    }
+    
+    return true;
+  };
+
+  // Filter expenses based on searchParams and selected category/date range
   const filteredExpenses = expenses.filter((expense) => {
     const matchesDescription = searchParams.description
       ? expense.description.toLowerCase().includes(searchParams.description.toLowerCase())
       : true;
 
-    const matchesCategory = searchParams.category
-      ? expense.category.toLowerCase().includes(searchParams.category.toLowerCase())
-      : true;
+    const matchesCategory = selectedCategory === "All" || !selectedCategory
+      ? true
+      : expense.category.toLowerCase() === selectedCategory.toLowerCase();
 
     const matchesAmount = searchParams.amount
       ? expense.amount === parseFloat(searchParams.amount)
       : true;
 
-    const matchesDate = searchParams.date
-      ? expense.date === searchParams.date
-      : true;
+    const matchesDate = matchesDateRange(expense.date);
 
     return matchesDescription && matchesCategory && matchesAmount && matchesDate;
   });
 
-  // Sort expenses by date (most recent first)
   const sortedExpenses = [...filteredExpenses].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  const uniqueCategories = [...new Set(expenses.map(expense => expense.category))];
+
+  const handleDateChange = (dateRange) => {
+    setSelectedDateRange(dateRange);
+  };
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category || "All");
+  };
 
   return (
     <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span>Date</span>
+          <DateFilter onDateChange={handleDateChange} />
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span>Category</span>
+          <CategoryFilter
+            categories={uniqueCategories}
+            onCategoryChange={handleCategoryChange}
+          />
+        </div>
+      </div>
+
       {sortedExpenses.length === 0 ? (
-        <p>No expenses recorded.</p>
+        <p style={{ textAlign: 'center', color: 'gray' }}>No expenses found for the selected filters.</p>
       ) : (
         <table>
           <thead>

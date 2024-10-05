@@ -36,16 +36,32 @@ export default function ExpenseForm({ onSubmit, expense }) {
     }
   }, [expense]);  // This effect runs when 'expense' changes
 
+  // Validate the form inputs
   const validateForm = () => {
     const newErrors = {};
-    if (!description) newErrors.description = "Description is required";
-    if (!amount || amount <= 0) newErrors.amount = "Amount should be a positive number";
-    if (!date) newErrors.date = "Date is required";
-    if (!category) newErrors.category = "Category is required";
+
+    if (!description) {
+      newErrors.description = "Description is required";
+    }
+    
+    const parsedAmount = parseFloat(amount);
+    if (isNaN(parsedAmount) || parsedAmount <= 0) {
+      newErrors.amount = "Amount should be a positive number";
+    }
+
+    if (!date) {
+      newErrors.date = "Date is required";
+    }
+
+    if (!category) {
+      newErrors.category = "Category is required";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -107,6 +123,8 @@ export default function ExpenseForm({ onSubmit, expense }) {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           placeholder="Enter amount"
+          min="0"
+          step="0.01"  // Allow decimal values
         />
         {errors.amount && <p style={{ color: "red" }}>{errors.amount}</p>}
       </div>
@@ -135,7 +153,7 @@ export default function ExpenseForm({ onSubmit, expense }) {
             <option value="Other">Other</option>
         </select>
         {errors.category && <p style={{ color: "red" }}>{errors.category}</p>}
-    </div>
+      </div>
 
       <button type="submit" style={{ marginTop: "20px" }}>Submit</button>
     </form>
