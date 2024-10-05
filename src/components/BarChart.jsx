@@ -22,7 +22,7 @@ export default function BarChart({ data }) {
     const stackedData = categories.map(category => ({
       category,
       totalAmount: d3.sum(data.filter(d => d.category === category), d => d.amount),
-      expenses: data.filter(d => d.category === category),
+      expenses: data.filter(d => d.category === category),  // Include individual expenses
     }));
 
     // Scales
@@ -32,10 +32,10 @@ export default function BarChart({ data }) {
       .padding(0.3);
 
     const yScale = d3.scaleLinear()
-      .domain([0, d3.max(stackedData, d => d.totalAmount)])
+      .domain([0, d3.max(stackedData, d => d.totalAmount)])  // Use totalAmount for each category
       .range([height - margin.bottom, margin.top]);
 
-    const barColor = '#4682B4';  // Single color for bars
+    const barColor = '#4682B4';  // Default color for bars
 
     // Axes
     const xAxis = d3.axisBottom(xScale);
@@ -76,9 +76,9 @@ export default function BarChart({ data }) {
       })
       .attr('width', xScale.bandwidth())
       .attr('height', d => height - margin.bottom - yScale(d.amount))
-      .attr('fill', barColor)
+      .attr('fill', barColor)  // Default color for bars
       .on("mouseover", function(event, d) {
-        d3.select(this).transition().duration(100).attr('fill', 'orange');
+        d3.select(this).transition().duration(100).attr('fill', 'orange');  // Change to yellow on hover
         const [x, y] = d3.pointer(event, svg.node());
         tooltip
           .style("visibility", "visible")
@@ -91,7 +91,7 @@ export default function BarChart({ data }) {
         tooltip.style("left", `${x + margin.left}px`).style("top", `${y + margin.top}px`);
       })
       .on("mouseout", function() {
-        d3.select(this).transition().duration(100).attr('fill', barColor);
+        d3.select(this).transition().duration(100).attr('fill', barColor);  // Revert color on mouseout
         tooltip.style("visibility", "hidden");
       });
 

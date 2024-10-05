@@ -6,16 +6,15 @@ export default function PieChart({ data }) {
   const tooltipRef = useRef();
 
   useEffect(() => {
-    if (data.length === 0) return;  // Stop if no data
+    if (data.length === 0) return;
 
     const svg = d3.select(svgRef.current);
     const tooltip = d3.select(tooltipRef.current);
     const width = 300;
     const height = 300;
     const radius = Math.min(width, height) / 2;
-    const color = d3.scaleOrdinal(d3.schemeTableau10);  // Updated color scheme to 'Tableau10'
+    const color = d3.scaleOrdinal(d3.schemeTableau10);
 
-    // Clear previous chart
     svg.selectAll("*").remove();
 
     // Group expenses by category and sum their amounts
@@ -26,16 +25,13 @@ export default function PieChart({ data }) {
       .value(d => d[1])
       .sort(null);
 
-    // Create arc generator
     const arc = d3.arc()
-      .innerRadius(50)  // Added inner radius to create a donut chart
+      .innerRadius(50)
       .outerRadius(radius);
 
-    // Create a group for the pie chart
     const g = svg.append('g')
       .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
-    // Bind data to the pie slices
     g.selectAll('path')
       .data(pie(categoryData))
       .enter()
@@ -52,34 +48,15 @@ export default function PieChart({ data }) {
       })
       .on('mousemove', function(event, d) {
         const [x, y] = d3.pointer(event, svg.node());
-
-        const tooltipWidth = tooltip.node().offsetWidth;
-        const tooltipHeight = tooltip.node().offsetHeight;
-
-        // Adjust tooltip position to stay within SVG bounds
-        let tooltipX = x + width / 2 + 10;
-        let tooltipY = y + height / 2 + 10;
-
-        // Ensure tooltip doesn't overflow on the right side
-        if (tooltipX + tooltipWidth > width) {
-          tooltipX -= tooltipWidth + 20;
-        }
-
-        // Ensure tooltip doesn't overflow on the bottom side
-        if (tooltipY + tooltipHeight > height) {
-          tooltipY -= tooltipHeight + 20;
-        }
-
         tooltip
-          .style("left", `${tooltipX}px`)
-          .style("top", `${tooltipY}px`);
+          .style("left", `${x + 10}px`)
+          .style("top", `${y + 10}px`);
       })
       .on('mouseout', function() {
         d3.select(this).transition().duration(200).attr('opacity', 1);
         tooltip.style("visibility", "hidden");
       });
 
-    // Add text labels for pie slices
     g.selectAll('text')
       .data(pie(categoryData))
       .enter()
@@ -100,7 +77,7 @@ export default function PieChart({ data }) {
         ref={tooltipRef}
         style={{
           position: 'absolute',
-          background: 'rgba(0, 0, 0, 0.7)',  // Dark background for better readability
+          background: 'rgba(0, 0, 0, 0.7)',
           color: 'white',
           padding: '8px',
           borderRadius: '5px',

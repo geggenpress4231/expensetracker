@@ -1,6 +1,6 @@
 import React from 'react';
 import { DatePicker, Space } from 'antd';
-import { CalendarOutlined } from '@ant-design/icons';  // Icon for date selection
+import { CalendarOutlined } from '@ant-design/icons';
 
 const { RangePicker } = DatePicker;
 
@@ -18,7 +18,7 @@ export default function DateFilter({ onDateChange }) {
           format="YYYY-MM-DD"
           placeholder={['Select Date Range']}
           style={{ width: '100%' }}
-          bordered={false}  // Flat design without borders
+          bordered={false}
         />
       </div>
     </Space>
