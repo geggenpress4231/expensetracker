@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteExpense, fetchExpenses } from "../../actions/expenseActions";
 import moment from 'moment';
@@ -10,11 +10,16 @@ export default function ExpenseList({ onEditExpense, searchParams, selectedDateR
   const expenses = useSelector((state) => state.expenses.expenses);
 
   useEffect(() => {
-    dispatch(fetchExpenses());
+    dispatch(fetchExpenses())
+      .catch((error) => console.error('Error fetching expenses:', error));
   }, [dispatch]);
 
-  const handleDelete = (id) => {
-    dispatch(deleteExpense(id));
+  const handleDelete = async (id) => {
+    try {
+      await dispatch(deleteExpense(id));
+    } catch (error) {
+      console.error('Error deleting expense:', error);
+    }
   };
 
   const matchesDateRange = (expenseDate) => {
@@ -32,39 +37,43 @@ export default function ExpenseList({ onEditExpense, searchParams, selectedDateR
     return true;
   };
 
-  const filteredExpenses = expenses.filter((expense) => {
-    const matchesDescription = searchParams.description
-      ? expense.description.toLowerCase().includes(searchParams.description.toLowerCase())
-      : true;
+  const filteredExpenses = useMemo(() => {
+    return expenses.filter((expense) => {
+      const matchesDescription = searchParams.description
+        ? expense.description.toLowerCase().includes(searchParams.description.toLowerCase())
+        : true;
 
-    const matchesCategory = selectedCategory === "All" || !selectedCategory
-      ? true
-      : expense.category.toLowerCase() === selectedCategory.toLowerCase();
+      const matchesCategory = selectedCategory === "All" || !selectedCategory
+        ? true
+        : expense.category.toLowerCase() === selectedCategory.toLowerCase();
 
-    const matchesAmount = searchParams.amount
-      ? expense.amount === parseFloat(searchParams.amount)
-      : true;
+      const matchesAmount = searchParams.amount
+        ? expense.amount === parseFloat(searchParams.amount)
+        : true;
 
-    const matchesDate = matchesDateRange(expense.date);
+      const matchesDate = matchesDateRange(expense.date);
 
-    return matchesDescription && matchesCategory && matchesAmount && matchesDate;
-  });
+      return matchesDescription && matchesCategory && matchesAmount && matchesDate;
+    });
+  }, [expenses, searchParams, selectedCategory, selectedDateRange]);
 
-  const sortedExpenses = [...filteredExpenses].sort((a, b) => new Date(b.date) - new Date(a.date));
+  const sortedExpenses = useMemo(() => {
+    return [...filteredExpenses].sort((a, b) => new Date(b.date) - new Date(a.date));
+  }, [filteredExpenses]);
 
   return (
-    <div className="expense-list-container">
+    <section className="expense-list-container">
       {sortedExpenses.length === 0 ? (
         <p className="no-expenses-message">No expenses found for the selected filters.</p>
       ) : (
-        <table className="expense-list-table">
+        <table className="expense-list-table" aria-label="Expense List">
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Category</th>
-              <th>Description</th>
-              <th>Amount</th>
-              <th>Options</th>
+              <th scope="col">Date</th>
+              <th scope="col">Category</th>
+              <th scope="col">Description</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Options</th>
             </tr>
           </thead>
           <tbody>
@@ -75,14 +84,18 @@ export default function ExpenseList({ onEditExpense, searchParams, selectedDateR
                 <td>{expense.description}</td>
                 <td>${expense.amount.toFixed(2)}</td>
                 <td className="expense-options">
-                  <FaEdit className="edit-icon" onClick={() => onEditExpense(expense)} />
-                  <FaTrashAlt className="delete-icon" onClick={() => handleDelete(expense.id)} />
+                  <button aria-label="Edit expense" onClick={() => onEditExpense(expense)}>
+                    <FaEdit className="edit-icon" />
+                  </button>
+                  <button aria-label="Delete expense" onClick={() => handleDelete(expense.id)}>
+                    <FaTrashAlt className="delete-icon" />
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-    </div>
+    </section>
   );
 }

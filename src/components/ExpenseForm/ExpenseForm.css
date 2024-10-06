@@ -23,19 +23,7 @@
   box-sizing: border-box; /* Prevent padding from affecting the element's width */
 }
 
-.expense-form .submit-btn {
-  background-color: #1a1f71; /* Consistent button style */
-  border: none;
-  transition: background-color 0.3s;
-}
 
-.expense-form .submit-btn:hover {
-  background-color: #14205b;
-}
-
-.expense-form .submit-btn:active {
-  background-color: #0d1820;
-}
 
 .expense-form .ant-form-item-label > label {
   font-size: 14px;

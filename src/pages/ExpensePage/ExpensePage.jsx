@@ -47,21 +47,27 @@ export default function ExpensePage() {
       {/* Search, Filters, and Add Expense Button in individual divs */}
       <div className="filters-container">
         <div className="filter-item">
-          <DateFilter onDateChange={handleDateChange} />
+          <DateFilter onDateChange={handleDateChange} aria-label="Filter expenses by date" />
         </div>
         <div className="filter-item">
           <CategoryFilter
             categories={categories}
             onCategoryChange={setSelectedCategories}
             selectedCategories={selectedCategories}
-            allowMultiple={true}  
+            allowMultiple={true}
+            aria-label="Filter expenses by category"  
           />
         </div>
         <div className="filter-item">
-          <ExpenseSearch onSearch={handleSearch} />
+          <ExpenseSearch onSearch={handleSearch} aria-label="Search expenses by description" />
         </div>
         <div className="filter-item">
-          <Button className="add-expense-btn" type="primary" onClick={() => showModalHandler()}>
+          <Button 
+            className="add-expense-btn" 
+            type="primary" 
+            onClick={() => showModalHandler()}
+            aria-label="Add a new expense"
+          >
             Add Expense
           </Button>
         </div>
@@ -73,6 +79,7 @@ export default function ExpensePage() {
         searchParams={searchParams} 
         selectedDateRange={selectedDateRange} 
         selectedCategories={selectedCategories}  // Changed to plural as it's a multi-select
+        aria-label="List of filtered expenses"
       />
 
       {/* Use ExpenseFormModal to handle the modal display */}

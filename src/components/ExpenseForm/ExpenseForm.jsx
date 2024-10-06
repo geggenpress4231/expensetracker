@@ -6,18 +6,16 @@ import moment from 'moment';
 
 export default function ExpenseForm({ onSubmit, expense }) {
   const dispatch = useDispatch();
-  const [form] = Form.useForm(); // Ant Design form instance
+  const [form] = Form.useForm();
   const [suggestions, setSuggestions] = useState([]);
   const LOCAL_STORAGE_KEY = 'expenseDescriptions';
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
 
-  // Load saved descriptions from localStorage when the component loads
   useEffect(() => {
     const savedDescriptions = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
     setSuggestions(savedDescriptions);
   }, []);
 
-  // Pre-fill form with expense data if editing
   useEffect(() => {
     if (expense) {
       form.setFieldsValue({
@@ -27,11 +25,10 @@ export default function ExpenseForm({ onSubmit, expense }) {
         category: expense.category,
       });
     } else {
-      form.resetFields(); // Reset the form if no expense is provided
+      form.resetFields();
     }
   }, [expense, form]);
 
-  // Handle form submission
   const onFinish = (values) => {
     const newExpense = {
       id: expense ? expense.id : Date.now(),
@@ -53,10 +50,9 @@ export default function ExpenseForm({ onSubmit, expense }) {
       dispatch(addExpense(newExpense));
     }
 
-    onSubmit(); // Close modal after adding/updating
+    onSubmit();
   };
 
-  // Filter suggestions based on input
   const handleSearch = (searchText) => {
     if (searchText) {
       setFilteredSuggestions(
@@ -65,7 +61,7 @@ export default function ExpenseForm({ onSubmit, expense }) {
         )
       );
     } else {
-      setFilteredSuggestions([]); // Clear suggestions if input is empty
+      setFilteredSuggestions([]);
     }
   };
 
@@ -76,26 +72,26 @@ export default function ExpenseForm({ onSubmit, expense }) {
       layout="vertical"
       className="expense-form"
       validateTrigger="onFinish"
-      requiredMark={false}   // Set validation to trigger on form submit
+      requiredMark={false}
     >
       <Form.Item
-        label="Description"
+        label={<label htmlFor="description">Description</label>}
         name="description"
         rules={[{ required: true, message: 'Please enter a description!' }]}
       >
         <AutoComplete
+          id="description"
           options={filteredSuggestions.map((desc) => ({ value: desc }))}
           placeholder="Enter description"
-          onSearch={handleSearch} // Filter suggestions as the user types
+          onSearch={handleSearch}
           allowClear
-       
-          
-          filterOption={false}
+          aria-autocomplete="list"
+          aria-expanded="false"
         />
       </Form.Item>
 
       <Form.Item
-        label="Amount"
+        label={<label htmlFor="amount">Amount</label>}
         name="amount"
         rules={[
           { required: true, message: 'Please enter an amount!' },
@@ -108,28 +104,35 @@ export default function ExpenseForm({ onSubmit, expense }) {
         ]}
       >
         <Input
+          id="amount"
           type="number"
           min="0.01"
           step="0.01"
           placeholder="Enter amount"
           style={{ width: '100%' }}
+          aria-required="true"
         />
       </Form.Item>
 
       <Form.Item
-        label="Date"
+        label={<label htmlFor="date">Date</label>}
         name="date"
         rules={[{ required: true, message: 'Please select a date!' }]}
       >
-        <DatePicker style={{ width: '100%' }} />
+        <DatePicker id="date" style={{ width: '100%' }} aria-required="true" />
       </Form.Item>
 
       <Form.Item
-        label="Category"
+        label={<label htmlFor="category">Category</label>}
         name="category"
         rules={[{ required: true, message: 'Please select a category!' }]}
       >
-        <Select placeholder="Select a category" allowClear>
+        <Select
+          id="category"
+          placeholder="Select a category"
+          allowClear
+          aria-required="true"
+        >
           <Select.Option value="Food">Food</Select.Option>
           <Select.Option value="Transport">Transport</Select.Option>
           <Select.Option value="Entertainment">Entertainment</Select.Option>
@@ -142,30 +145,29 @@ export default function ExpenseForm({ onSubmit, expense }) {
       </Form.Item>
 
       <Form.Item>
-  <Button 
-    type="primary" 
-    htmlType="submit" 
-    block
-    className="submit-btn"
-    style={{ 
-      backgroundColor: '#1a1f71', 
-      borderColor: '#1a1f71', 
-      color: '#ffffff',
-      transition: 'background-color 0.3s ease'  // Adding a smooth transition effect
-    }}
-    onMouseEnter={(e) => {
-      e.target.style.backgroundColor = '#14205b';  // Darker navy on hover
-    }}
-    onMouseLeave={(e) => {
-      e.target.style.backgroundColor = '#1a1f71';  // Reset to original color on mouse leave
-    }}
-  >
-    Submit
-  </Button>
-</Form.Item>
+      <Button
+  type="primary"
+  htmlType="submit"
+  block
+  className="submit-btn"
+  aria-label="Submit expense form"
+  style={{ 
+    backgroundColor: '#1a1f71',  // Darker navy base color
+    borderColor: '#1a1f71', 
+    color: '#ffffff',
+    transition: 'background-color 0.3s ease'  // Smooth transition for color
+  }}
+  onMouseEnter={(e) => {
+    e.target.style.backgroundColor = '#3c4dbd';  // Lighter shade on hover
+  }}
+  onMouseLeave={(e) => {
+    e.target.style.backgroundColor = '#1a1f71';  // Reset to original color
+  }}
+>
+  Submit
+</Button>
 
-
-
+      </Form.Item>
     </Form>
   );
 }
