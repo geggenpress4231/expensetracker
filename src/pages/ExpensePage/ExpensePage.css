@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    overflow: hidden;
+    overflow: auto;  /* Allow scrolling if necessary */
 }
 
 /* Main page layout */
@@ -19,10 +19,9 @@ body {
     height: 90vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: auto;  /* Allow vertical scrolling */
 }
 
-/* Filters and Add Expense Button */
 /* Filters and Add Expense Button */
 .filters-container {
     display: flex;
@@ -30,7 +29,6 @@ body {
     align-items: center;
     gap: 1vw;
     margin-bottom: 2vh;
-    
 }
 
 /* Ensure all filter items, including search, have consistent height */
@@ -45,14 +43,13 @@ body {
 .filters-container .filter-item:nth-child(3),
 .filters-container .filter-item:nth-child(4) {
     align-self: flex-end;
-    flex-grow:1; /* Align the search bar and button to the bottom */
+    flex-grow: 1; /* Align the search bar and button to the bottom */
 }
 
-/* Add specific margin adjustments for better spacing */
+/* Margin adjustment for better spacing */
 .filters-container .filter-item:nth-child(2) {
     margin-right: 28vw; /* Add margin between search and button */
 }
-
 
 /* Specific styles for search input to ensure it fills the height */
 .expense-search {
@@ -138,6 +135,7 @@ h1 {
     text-align: left;
     font-family: 'Lato', sans-serif;
 }
+
 @media (max-width: 768px) {
     .filters-container {
       flex-direction: column; /* Stack search and button vertically */
@@ -153,5 +151,41 @@ h1 {
     .filters-container .filter-item:nth-child(4) {
       margin-top: 1vh; /* Add a small gap between search and button */
     }
-  }
+}
+
+@media (max-width: 992px) and (min-width: 768px) {
+    /* Adjust padding for tablets */
+    .summary-page-container {
+      padding: 2vh 3vw;
+    }
   
+    /* Adjust filter container to show category and search side by side */
+    .filters-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+  
+    /* Ensure category and search inputs are side by side */
+    .filter-item {
+      flex: 1;
+      min-width: 200px;
+      max-width: 45%; /* Ensure they fit nicely on the same line */
+    }
+  
+    /* Adjust category and search width for side-by-side layout */
+    .filter-item .ant-select, 
+    .filter-item .ant-picker,
+    .filter-item .search-input {  /* Assuming you have a specific class for the search input */
+      width: 100%;
+    }
+  
+    /* Place Add Expense button below */
+    .add-expense-btn-container {
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;  /* Add some margin to create space between the filters and button */
+    }
+}
