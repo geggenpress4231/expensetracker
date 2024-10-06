@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from "react";
 import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';  
-import ExpenseList from "../../components/ExpenseList";
-import HamburgerMenu from "../../components/HamburgerMenu";
+import ExpenseList from "../../components/ExpenseList/ExpenseList";
+import HamburgerMenu from "../../components/HamburgerMenu/HamburgerMenu";
 import ExpenseSearch from "../../components/ExpenseSearch"; 
 import DateFilter from "../../components/DateFilter";  
 import { showModal } from "../../actions/modalActions";  

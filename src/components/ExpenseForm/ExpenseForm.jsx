@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { addExpense, updateExpense } from '../actions/expenseActions';
+import { addExpense, updateExpense } from '../../actions/expenseActions';
 import { AutoComplete, Input, Button, Select, DatePicker, Form } from 'antd';
 import moment from 'moment';
 

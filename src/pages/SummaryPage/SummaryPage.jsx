@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import BarChart from '../../components/BarChart';
 import PieChart from '../../components/PieChart';
 import { fetchExpenses } from '../../actions/expenseActions';
-import HamburgerMenu from '../../components/HamburgerMenu';
+import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import DateFilter from '../../components/DateFilter'; 
 import CategoryFilter from '../../components/CategoryFilter';
 import moment from 'moment';

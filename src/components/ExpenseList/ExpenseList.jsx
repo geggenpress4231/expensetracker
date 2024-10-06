@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteExpense, fetchExpenses } from "../actions/expenseActions";
+import { deleteExpense, fetchExpenses } from "../../actions/expenseActions";
 import moment from 'moment';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';  // Importing FontAwesome icons
 import './ExpenseList.css'

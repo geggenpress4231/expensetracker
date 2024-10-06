@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import ExpenseForm from './ExpenseForm';
+import ExpenseForm from './ExpenseForm/ExpenseForm';
 import { hideModal } from '../actions/modalActions';
 
 const ExpenseFormModal = () => {

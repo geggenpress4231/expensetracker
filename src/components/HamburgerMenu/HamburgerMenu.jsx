@@ -3,7 +3,7 @@ import { Menu, Drawer, Button } from 'antd';
 import { MenuOutlined, HomeOutlined, PlusOutlined, BarChartOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { showModal } from '../actions/modalActions';
+import { showModal } from '../../actions/modalActions';
 import './HamburgerMenu.css';  // Import the CSS
 
 const HamburgerMenu = () => {
