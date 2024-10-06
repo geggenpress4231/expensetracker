@@ -142,10 +142,30 @@ export default function ExpenseForm({ onSubmit, expense }) {
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" block>
-          Submit
-        </Button>
-      </Form.Item>
+  <Button 
+    type="primary" 
+    htmlType="submit" 
+    block
+    className="submit-btn"
+    style={{ 
+      backgroundColor: '#1a1f71', 
+      borderColor: '#1a1f71', 
+      color: '#ffffff',
+      transition: 'background-color 0.3s ease'  // Adding a smooth transition effect
+    }}
+    onMouseEnter={(e) => {
+      e.target.style.backgroundColor = '#14205b';  // Darker navy on hover
+    }}
+    onMouseLeave={(e) => {
+      e.target.style.backgroundColor = '#1a1f71';  // Reset to original color on mouse leave
+    }}
+  >
+    Submit
+  </Button>
+</Form.Item>
+
+
+
     </Form>
   );
 }
