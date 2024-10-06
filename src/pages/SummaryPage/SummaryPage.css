@@ -180,32 +180,46 @@ h1 {
 }
 
 @media (max-width: 480px) {
+  /* Ensure body or parent containers don't restrict width */
+  body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
   .summary-page-container {
     width: 100vw; /* Ensure it stretches fully across */
-    padding: 1vh 1vw;
-    margin: 0;
+    padding: 0; /* Remove any padding */
+    margin: 0 auto; /* Center and avoid unwanted margin */
   }
 
   .filter-expense-container {
     flex-direction: column;
     width: 100%;
-    gap: 8px;
+    padding: 0; /* Ensure no padding interferes with width */
   }
 
   .total-expenses {
     font-size: 1rem;
     text-align: center;
+    margin: 0 auto;
+    width: 100%; /* Stretch fully */
   }
 
   .charts-container {
     gap: 10px;
+    width: 100%; /* Ensure full-width for charts */
   }
 
   .bar-chart-container, .pie-chart-container {
     height: 250px;
+    width: 100%; /* Ensure charts are full-width */
   }
 
   h1 {
     font-size: 1.6rem;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto; /* Center the heading */
   }
 }
