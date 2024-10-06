@@ -1,55 +1,69 @@
 .expense-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 90%; /* Allow the form to take up to 90% of the viewport width */
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.expense-form .ant-form-item {
+  margin-bottom: 16px;
+}
+
+.expense-form input, 
+.expense-form .ant-select-selector, 
+.expense-form .ant-picker, 
+.submit-btn {
+  height: 45px;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%; /* Ensure all inputs are 100% wide of their container */
+  box-sizing: border-box; /* Prevent padding from affecting the element's width */
+}
+
+.expense-form .submit-btn {
+  background-color: #1a1f71; /* Consistent button style */
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.expense-form .submit-btn:hover {
+  background-color: #14205b;
+}
+
+.expense-form .submit-btn:active {
+  background-color: #0d1820;
+}
+
+.expense-form .ant-form-item-label > label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.expense-form .ant-form-item-explain-error {
+  font-size: 12px;
+  color: #ff4d4f;
+}
+
+/* Style for AutoComplete dropdown */
+.expense-form .ant-select-dropdown {
+  background-color: #333;
+  color: #fff;
+  font-size: 8px;
+}
+
+/* Media Queries for responsiveness */
+@media (min-width: 768px) {
+  .expense-form {
+    max-width: 600px; /* Set a maximum width for larger screens */
   }
-  
-  .expense-form .ant-form-item {
-    margin-bottom: 16px;
+}
+
+@media (max-width: 480px) {
+  .expense-form {
+    padding: 15px; /* Adjust padding for smaller screens */
   }
-  
-  .expense-form input, 
-  .expense-form .ant-select-selector, 
-  .expense-form .ant-picker, 
-  .submit-btn {
-    height: 45px;
-    font-size: 16px;
-    padding: 10px;
-    border-radius: 4px;
-  }
-  
-  .expense-form .submit-btn {
-    background-color: #1a1f71; /* Consistent button style */
-    border: none;
-    transition: background-color 0.3s;
-  }
-  
-  .expense-form .submit-btn:hover {
-    background-color: #14205b;
-  }
-  
-  .expense-form .submit-btn:active {
-    background-color: #0d1820;
-  }
-  
-  .expense-form .ant-form-item-label > label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .expense-form .ant-form-item-explain-error {
-    font-size: 12px;
-    color: #ff4d4f;
-  }
-  
-  /* Style for AutoComplete dropdown */
-  .expense-form .ant-select-dropdown {
-    background-color: #333;
-    color: #fff;
-    font-size: 8px;
-  }
-  
+}

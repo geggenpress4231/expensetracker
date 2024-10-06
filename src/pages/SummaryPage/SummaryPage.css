@@ -109,3 +109,103 @@ h1 {
     margin-left: 0;
 }
 
+@media (max-width: 992px) {
+  /* Adjust padding for larger tablets */
+  .summary-page-container {
+    padding: 2vh 3vw;
+  }
+
+  /* Adjust filter container to be more compact */
+  .filter-expense-container {
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 15px;
+  }
+
+  /* Ensure charts fit the container */
+  .charts-container {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .bar-chart-container, .pie-chart-container {
+    width: 48%; /* Ensure both charts fit side by side */
+  }
+}
+
+/* Adjust container and remove any extra padding/margin */
+@media (max-width: 768px) {
+  /* Ensure the container takes full width */
+  .summary-page-container {
+    width: 100vw;
+    margin: 0 auto;  /* Center the container */
+    padding: 2vh 2vw;
+  }
+
+  /* Ensure charts and filters fit nicely */
+  .filter-expense-container {
+    flex-direction: column;
+    padding: 1vh 2vw;
+    gap: 10px;
+  }
+
+  /* Make filters stack vertically */
+  .filter-item {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  /* Ensure the total expenses and charts fit properly */
+  .total-expenses {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+
+  /* Stack the charts vertically */
+  .charts-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bar-chart-container, .pie-chart-container {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .summary-page-container {
+    width: 100vw; /* Ensure it stretches fully across */
+    padding: 1vh 1vw;
+    margin: 0;
+  }
+
+  .filter-expense-container {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .total-expenses {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .charts-container {
+    gap: 10px;
+  }
+
+  .bar-chart-container, .pie-chart-container {
+    height: 250px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+}

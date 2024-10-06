@@ -138,3 +138,20 @@ h1 {
     text-align: left;
     font-family: 'Lato', sans-serif;
 }
+@media (max-width: 768px) {
+    .filters-container {
+      flex-direction: column; /* Stack search and button vertically */
+      align-items: stretch; /* Make the items take full width */
+    }
+  
+    .filters-container .filter-item:nth-child(3),
+    .filters-container .filter-item:nth-child(4) {
+      width: 100%; /* Make the search and button take full width */
+      align-self: center;
+    }
+  
+    .filters-container .filter-item:nth-child(4) {
+      margin-top: 1vh; /* Add a small gap between search and button */
+    }
+  }
+  
