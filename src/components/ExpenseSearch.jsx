@@ -54,14 +54,15 @@ export default function ExpenseSearch() {
   };
 
   return (
-    <div>
-      {/* Single search bar */}
+  
       <Search
-        placeholder="Search by description or amount"
+        placeholder="Search"
         value={query}
         onChange={handleSearchChange} // Call debounced search on input change
         allowClear
+        
       />
-    </div>
+   
+    
   );
 }

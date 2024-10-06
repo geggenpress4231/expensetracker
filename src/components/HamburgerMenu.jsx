@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import { Menu, Drawer, Button } from 'antd';
 import { MenuOutlined, HomeOutlined, PlusOutlined, BarChartOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';  // Import useDispatch for Redux
-import { showModal } from '../actions/modalActions';  // Import the Redux action to show modal
+import { useDispatch } from 'react-redux';
+import { showModal } from '../actions/modalActions';
 import './HamburgerMenu.css';  // Import the CSS
 
 const HamburgerMenu = () => {
   const [visible, setVisible] = useState(false);
-  const dispatch = useDispatch();  // Use dispatch to trigger actions
-  const location = useLocation();  // Access current route
+  const dispatch = useDispatch();
+  const location = useLocation();
 
   const showDrawer = () => setVisible(true);
   const closeDrawer = () => setVisible(false);
 
   const handleAddExpense = () => {
-    dispatch(showModal());  // Dispatch the action to show modal
+    dispatch(showModal());
     closeDrawer();
   };
 
@@ -25,19 +25,22 @@ const HamburgerMenu = () => {
         type="primary" 
         icon={<MenuOutlined />} 
         onClick={showDrawer} 
-        className="hamburger-button"  // Add class for styling
+        className="hamburger-button"
       />
       <Drawer
         placement="left"
-        closable={true}
+        closable={false}  // Remove close button
         onClose={closeDrawer}
         visible={visible}
-        bodyStyle={{ padding: 0 }}  // Remove padding to match YouTube-like layout
+        bodyStyle={{ padding: 0, backgroundColor: '#f4f6f9' }}  // Set background color for the drawer
+        width={220}  // Make the drawer a bit smaller
       >
+       
         <Menu
           mode="inline"
-          selectedKeys={[location.pathname]} // Highlight menu item based on the current route
+          selectedKeys={[location.pathname]}
           onClick={closeDrawer}
+          style={{ marginTop: '10vh' }}
         >
           <Menu.Item key="/expense-tracker" icon={<HomeOutlined />}>
             <Link to="/expense-tracker">Expense Tracker</Link>

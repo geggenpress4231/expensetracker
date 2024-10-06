@@ -141,13 +141,6 @@
       "category": "Entertainment"
     },
     {
-      "id": "1728086706277",
-      "description": "osmow",
-      "amount": 12.34,
-      "date": "2024-10-10",
-      "category": "Food"
-    },
-    {
       "id": "1728134856469",
       "description": "kebab place",
       "amount": 100,
@@ -166,6 +159,13 @@
       "description": "osmows",
       "amount": 12,
       "date": "2023-10-05",
+      "category": "Food"
+    },
+    {
+      "id": 1728237024381,
+      "description": "osmows",
+      "amount": 21.34,
+      "date": "2024-10-05",
       "category": "Food"
     }
   ]

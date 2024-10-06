@@ -5,11 +5,11 @@ import PieChart from '../components/PieChart';
 import { fetchExpenses } from '../actions/expenseActions';
 import HamburgerMenu from '../components/HamburgerMenu';
 import DateFilter from '../components/DateFilter'; 
-import { Select } from 'antd';
+import CategoryFilter from '../components/CategoryFilter';
 import moment from 'moment';
 import './SummaryPage.css';
 
-const { Option } = Select;
+
 
 export default function SummaryPage() {
   const dispatch = useDispatch();
@@ -70,32 +70,25 @@ export default function SummaryPage() {
       <h1 className="summary-page-title">Expense Summary</h1>
 
       {/* Filters and Total Expenses in One Row */}
-      <div className="filter-total-expense-container">
-        <div className="filter-item">
-          <DateFilter onDateChange={handleDateChange} />
-        </div>
+      <div className="filter-expense-container">
+  <div className="filter-item">
+    <DateFilter onDateChange={handleDateChange} />
+  </div>
 
-        <div className="filter-item">
-          <Select
-            mode="multiple"
-            allowClear
-            placeholder="Select Categories"
-            style={{ width: '100%' }}
-            onChange={setSelectedCategories}
-            value={selectedCategories}
-          >
-            {categories.map(category => (
-              <Option key={category} value={category}>
-                {category}
-              </Option>
-            ))}
-          </Select>
-        </div>
+  <div className="filter-item">
+    <CategoryFilter
+      categories={categories}
+      onCategoryChange={setSelectedCategories}
+      selectedCategories={selectedCategories}
+      allowMultiple={true}  // Enable multi-select
+    />
+  </div>
 
-        <div className="total-expenses">
-          <h2>Total Expenses: ${totalExpenses.toFixed(2)}</h2>
-        </div>
-      </div>
+  <div className="filter-item">
+    <h2 className="total-expenses">Total Expenses: ${totalExpenses.toFixed(2)}</h2>
+  </div>
+</div>
+
 
       {/* Charts Container */}
       <div className="charts-container">

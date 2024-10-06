@@ -3,15 +3,17 @@ import { Select } from 'antd';
 
 const { Option } = Select;
 
-export default function CategoryFilter({ categories, onCategoryChange }) {
+export default function CategoryFilter({ categories, onCategoryChange, selectedCategories, allowMultiple = false }) {
   return (
     <Select
-      placeholder="Select Category"
-      onChange={onCategoryChange}
+      mode={allowMultiple ? "multiple" : undefined}
       allowClear
+      placeholder="Select Category"
+      style={{ width: '100%' }}
+      onChange={onCategoryChange}
+      value={selectedCategories}
     >
-      <Option value="All">All</Option>  {/* "All" option */}
-      {categories.map((category) => (
+      {categories.map(category => (
         <Option key={category} value={category}>
           {category}
         </Option>

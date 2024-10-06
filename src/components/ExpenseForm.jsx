@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';  // Import useDispatch from Redux
-import { addExpense, updateExpense } from '../actions/expenseActions';  // Import Redux actions
-import { AutoComplete } from 'antd';  // Import Ant Design AutoComplete
+import { useDispatch } from 'react-redux';
+import { addExpense, updateExpense } from '../actions/expenseActions';
+import { AutoComplete, Input, Button, Select, DatePicker, Form } from 'antd';
+import moment from 'moment';
 
 export default function ExpenseForm({ onSubmit, expense }) {
-  const dispatch = useDispatch();  // Initialize dispatch from Redux
-  const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState("");
-  const [date, setDate] = useState("");
-  const [category, setCategory] = useState("");
-  const [errors, setErrors] = useState({});
-  const [suggestions, setSuggestions] = useState([]);  // Suggestions for autocomplete
-
+  const dispatch = useDispatch();
+  const [form] = Form.useForm(); // Ant Design form instance
+  const [suggestions, setSuggestions] = useState([]);
   const LOCAL_STORAGE_KEY = 'expenseDescriptions';
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
 
   // Load saved descriptions from localStorage when the component loads
   useEffect(() => {
@@ -20,142 +17,135 @@ export default function ExpenseForm({ onSubmit, expense }) {
     setSuggestions(savedDescriptions);
   }, []);
 
-  // Pre-fill form with expense data if editing, or reset fields when adding a new expense
+  // Pre-fill form with expense data if editing
   useEffect(() => {
     if (expense) {
-      setDescription(expense.description);
-      setAmount(expense.amount);
-      setDate(expense.date);
-      setCategory(expense.category);
+      form.setFieldsValue({
+        description: expense.description,
+        amount: expense.amount,
+        date: moment(expense.date),
+        category: expense.category,
+      });
     } else {
-      // If there's no existing expense (i.e., adding a new expense), reset the fields
-      setDescription("");
-      setAmount("");
-      setDate("");
-      setCategory("");
+      form.resetFields(); // Reset the form if no expense is provided
     }
-  }, [expense]);  // This effect runs when 'expense' changes
-
-  // Validate the form inputs
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!description) {
-      newErrors.description = "Description is required";
-    }
-    
-    const parsedAmount = parseFloat(amount);
-    if (isNaN(parsedAmount) || parsedAmount <= 0) {
-      newErrors.amount = "Amount should be a positive number";
-    }
-
-    if (!date) {
-      newErrors.date = "Date is required";
-    }
-
-    if (!category) {
-      newErrors.category = "Category is required";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  }, [expense, form]);
 
   // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      const newExpense = {
-        id: expense ? expense.id : Date.now(),
-        description,
-        amount: parseFloat(amount),
-        date,
-        category
-      };
+  const onFinish = (values) => {
+    const newExpense = {
+      id: expense ? expense.id : Date.now(),
+      description: values.description,
+      amount: parseFloat(values.amount),
+      date: values.date.format('YYYY-MM-DD'),
+      category: values.category,
+    };
 
-      const savedDescriptions = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
-      if (!savedDescriptions.includes(description)) {
-        savedDescriptions.push(description);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedDescriptions));  // Save updated descriptions to localStorage
-      }
+    const savedDescriptions = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+    if (!savedDescriptions.includes(values.description)) {
+      savedDescriptions.push(values.description);
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedDescriptions));
+    }
 
-      if (expense) {
-        dispatch(updateExpense(newExpense));
-      } else {
-        dispatch(addExpense(newExpense));
-      }
+    if (expense) {
+      dispatch(updateExpense(newExpense));
+    } else {
+      dispatch(addExpense(newExpense));
+    }
 
-      onSubmit();  // Close modal after adding/updating
+    onSubmit(); // Close modal after adding/updating
+  };
 
-      // Clear form fields after submit
-      setDescription("");
-      setAmount("");
-      setDate("");
-      setCategory("");
+  // Filter suggestions based on input
+  const handleSearch = (searchText) => {
+    if (searchText) {
+      setFilteredSuggestions(
+        suggestions.filter((desc) =>
+          desc.toLowerCase().startsWith(searchText.toLowerCase())
+        )
+      );
+    } else {
+      setFilteredSuggestions([]); // Clear suggestions if input is empty
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="expense-form">
-      <div>
-        <label>Description:</label>
-        {/* AutoComplete with suggestions when input is empty */}
+    <Form
+      form={form}
+      onFinish={onFinish}
+      layout="vertical"
+      className="expense-form"
+      validateTrigger="onFinish"
+      requiredMark={false}   // Set validation to trigger on form submit
+    >
+      <Form.Item
+        label="Description"
+        name="description"
+        rules={[{ required: true, message: 'Please enter a description!' }]}
+      >
         <AutoComplete
-          options={suggestions.map((desc) => ({ value: desc }))}  // Format suggestions for AutoComplete
-          style={{ width: '100%' }}
-          value={description}
-          onChange={setDescription}
+          options={filteredSuggestions.map((desc) => ({ value: desc }))}
           placeholder="Enter description"
+          onSearch={handleSearch} // Filter suggestions as the user types
           allowClear
-          filterOption={(inputValue, option) =>
-            inputValue
-              ? option.value.toLowerCase().startsWith(inputValue.toLowerCase())  // Show filtered suggestions based on input
-              : true  // Show all suggestions if input is empty
-          }
+       
+          
+          filterOption={false}
         />
-        {errors.description && <p style={{ color: "red" }}>{errors.description}</p>}
-      </div>
-      
-      <div>
-        <label>Amount:</label>
-        <input
+      </Form.Item>
+
+      <Form.Item
+        label="Amount"
+        name="amount"
+        rules={[
+          { required: true, message: 'Please enter an amount!' },
+          {
+            validator: (_, value) =>
+              value && parseFloat(value) > 0
+                ? Promise.resolve()
+                : Promise.reject('Amount must be greater than 0!'),
+          },
+        ]}
+      >
+        <Input
           type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          min="0.01"
+          step="0.01"
           placeholder="Enter amount"
-          min="0"
-          step="0.01"  // Allow decimal values
+          style={{ width: '100%' }}
         />
-        {errors.amount && <p style={{ color: "red" }}>{errors.amount}</p>}
-      </div>
+      </Form.Item>
 
-      <div>
-        <label>Date:</label>
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        {errors.date && <p style={{ color: "red" }}>{errors.date}</p>}
-      </div>
+      <Form.Item
+        label="Date"
+        name="date"
+        rules={[{ required: true, message: 'Please select a date!' }]}
+      >
+        <DatePicker style={{ width: '100%' }} />
+      </Form.Item>
 
-      <div>
-        <label>Category:</label>
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-            <option value="">Select a category</option>
-            <option value="Food">Food</option>
-            <option value="Transport">Transport</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Bills">Bills</option>
-            <option value="Health">Health</option>
-            <option value="Groceries">Groceries</option>
-            <option value="Education">Education</option>
-            <option value="Other">Other</option>
-        </select>
-        {errors.category && <p style={{ color: "red" }}>{errors.category}</p>}
-      </div>
+      <Form.Item
+        label="Category"
+        name="category"
+        rules={[{ required: true, message: 'Please select a category!' }]}
+      >
+        <Select placeholder="Select a category" allowClear>
+          <Select.Option value="Food">Food</Select.Option>
+          <Select.Option value="Transport">Transport</Select.Option>
+          <Select.Option value="Entertainment">Entertainment</Select.Option>
+          <Select.Option value="Bills">Bills</Select.Option>
+          <Select.Option value="Health">Health</Select.Option>
+          <Select.Option value="Groceries">Groceries</Select.Option>
+          <Select.Option value="Education">Education</Select.Option>
+          <Select.Option value="Other">Other</Select.Option>
+        </Select>
+      </Form.Item>
 
-      <button type="submit" style={{ marginTop: "20px" }}>Submit</button>
-    </form>
+      <Form.Item>
+        <Button type="primary" htmlType="submit" block>
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
   );
 }

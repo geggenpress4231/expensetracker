@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Button, Modal } from 'antd';  
 import { useDispatch, useSelector } from 'react-redux';  
 import ExpenseList from "../components/ExpenseList";
@@ -6,18 +6,21 @@ import ExpenseForm from "../components/ExpenseForm";
 import HamburgerMenu from "../components/HamburgerMenu";
 import ExpenseSearch from "../components/ExpenseSearch"; 
 import DateFilter from "../components/DateFilter";  
-import CategoryFilter from "../components/CategoryFilter";  
 import { showModal, hideModal } from "../actions/modalActions";  
+import CategoryFilter from "../components/CategoryFilter";
 import './ExpensePage.css';
+
+
 
 export default function ExpensePage() {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useState({}); // State for search parameters
   const [selectedDateRange, setSelectedDateRange] = useState([null, null]); // Date filter state
-  const [selectedCategory, setSelectedCategory] = useState("All"); // Category filter state
+  const [selectedCategories, setSelectedCategories] = useState([]); // Category filter state
 
   const isModalVisible = useSelector((state) => state.modal.isModalVisible);
   const editingExpense = useSelector((state) => state.modal.editingExpense);
+  const expenses = useSelector((state) => state.expenses.expenses); // Assuming expenses come from Redux store
 
   // Show modal for Add or Edit Expense
   const showModalHandler = (expense = null) => {
@@ -38,29 +41,33 @@ export default function ExpensePage() {
     setSelectedDateRange(dateRange);
   };
 
-  // Handle category change for CategoryFilter
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category || "All");
-  };
-
-  const categories = ["Food", "Transport", "Health", "Entertainment", "Bills"]; 
+  // Extract unique categories from expenses and add 'All' option
+  const categories = useMemo(() => {
+    return ['All', ...new Set(expenses.map(expense => expense.category))];
+  }, [expenses]);
 
   return (
     <div className="expense-page">
       <HamburgerMenu />
 
-      <h1>Expense Tracker</h1>
+      <h1 className="expense-page-title">Expense Tracker</h1>
 
       {/* Search, Filters, and Add Expense Button in individual divs */}
       <div className="filters-container">
-        <div className="filter-item">
-          <ExpenseSearch onSearch={handleSearch} />
-        </div>
+       
         <div className="filter-item">
           <DateFilter onDateChange={handleDateChange} />
         </div>
         <div className="filter-item">
-          <CategoryFilter categories={categories} onCategoryChange={handleCategoryChange} />
+        <CategoryFilter
+            categories={categories}
+            onCategoryChange={setSelectedCategories}
+            selectedCategories={selectedCategories}
+            allowMultiple={true}  
+          />
+        </div>
+        <div className="filter-item">
+          <ExpenseSearch onSearch={handleSearch} />
         </div>
         <div className="filter-item">
           <Button className="add-expense-btn" type="primary" onClick={() => showModalHandler()}>
@@ -74,7 +81,7 @@ export default function ExpensePage() {
         onEditExpense={showModalHandler} 
         searchParams={searchParams} 
         selectedDateRange={selectedDateRange} 
-        selectedCategory={selectedCategory} 
+        selectedCategories={selectedCategories}  // Changed to plural as it's a multi-select
       />
 
       {isModalVisible && (
