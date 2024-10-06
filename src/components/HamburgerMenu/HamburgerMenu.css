@@ -6,8 +6,9 @@
     background-color: #1a1f71; /* Navy color */
     border-radius: 50%;
     padding: 10px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, top 0.3s ease, left 0.3s ease; /* Smooth transitions */
     cursor: pointer;
+    z-index: 1000; /* Ensure button stays above other elements */
 }
 
 .hamburger-button:hover {
@@ -40,6 +41,7 @@
 .ant-drawer-content {
     background-color: #f4f6f9;
     padding: 0; /* Remove extra padding for a clean look */
+    overflow: hidden; /* Prevents scrolling inside drawer */
 }
 
 /* Menu Styles */
@@ -57,7 +59,7 @@
     display: flex;
     align-items: center;
     color: #1a1f71; /* Navy color for the text */
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, padding 0.3s ease; /* Added padding transition */
 }
 
 .ant-menu-item:hover {

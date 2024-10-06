@@ -97,117 +97,135 @@ h1 {
   letter-spacing: 0.5px;
 }
 
+/* Responsive Styles for Larger Tablets (Max Width: 992px) */
 @media (max-width: 992px) {
-/* Adjust padding for larger tablets */
-.summary-page-container {
-  padding: 2vh 3vw;
+  .summary-page-container {
+    padding: 2vh 3vw;
+  }
+
+  .filter-expense-container {
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 15px;
+  }
+
+  .charts-container {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .bar-chart-container, .pie-chart-container {
+    width: 48%;
+  }
+
+  /* Hamburger Icon Fix for Tablets */
+  .hamburger-menu {
+    position: absolute;
+    top: 15px;  /* Adjusted top position for larger tablets */
+    left: 20px; /* Adjusted left position */
+    z-index: 10;
+  }
 }
 
-/* Adjust filter container to be more compact */
-.filter-expense-container {
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 15px;
-}
-
-/* Ensure charts fit the container */
-.charts-container {
-  flex-direction: row;
-  gap: 15px;
-}
-
-.bar-chart-container, .pie-chart-container {
-  width: 48%; /* Ensure both charts fit side by side */
-}
-}
-
+/* Responsive Styles for Mobile Devices (Max Width: 768px) */
 @media (max-width: 768px) {
-/* Ensure the container takes full width */
-.summary-page-container {
-  width: 100vw;
-  margin: 0 auto;  /* Center the container */
-  padding: 2vh 2vw;
-  overflow-y: auto;  /* Enable vertical scrolling */
+  .summary-page-container {
+    width: 100vw;
+    margin: 0 auto;
+    padding: 2vh 2vw;
+    overflow-y: auto;
+  }
+
+  .filter-expense-container {
+    flex-direction: column;
+    padding: 1vh 2vw;
+    gap: 10px;
+  }
+
+  .filter-item {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .total-expenses {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+
+  .charts-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .bar-chart-container, .pie-chart-container {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  /* Hamburger Icon Fix for Mobile */
+  .hamburger-menu {
+    position: absolute;
+    top: 3px;  /* Adjusted top position for smaller devices */
+    left: 5px; /* Adjusted left position */
+    z-index: 10;
+  }
 }
 
-/* Ensure charts and filters fit nicely */
-.filter-expense-container {
-  flex-direction: column;
-  padding: 1vh 2vw;
-  gap: 10px;
-}
-
-/* Make filters stack vertically */
-.filter-item {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-/* Ensure the total expenses and charts fit properly */
-.total-expenses {
-  text-align: center;
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-/* Stack the charts vertically */
-.charts-container {
-  flex-direction: column;
-  gap: 10px;
-}
-
-.bar-chart-container, .pie-chart-container {
-  width: 100%;
-  height: auto;
-  min-height: 300px;
-}
-
-h1 {
-  font-size: 1.8rem;
-}
-}
-
+/* Responsive Styles for Small Mobile Devices (Max Width: 480px) */
 @media (max-width: 480px) {
-/* Ensure body or parent containers don't restrict width */
-body {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
+  body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
 
-.summary-page-container {
-  width: 100vw; /* Ensure it stretches fully across */
-  padding: 0; /* Remove any padding */
-  margin: 0 auto; /* Center and avoid unwanted margin */
-}
+  .summary-page-container {
+    width: 100vw;
+    padding: 0;
+    margin: 0 auto;
+  }
 
-.filter-expense-container {
-  flex-direction: column;
-  width: 100%;
-  padding: 0; /* Ensure no padding interferes with width */
-}
+  .filter-expense-container {
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+  }
 
-.total-expenses {
-  font-size: 1rem;
-  text-align: center;
-  margin: 0 auto;
-  width: 100%; /* Stretch fully */
-}
+  .total-expenses {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+  }
 
-.charts-container {
-  gap: 10px;
-  width: 100%; /* Ensure full-width for charts */
-}
+  .charts-container {
+    gap: 10px;
+    width: 100%;
+  }
 
-.bar-chart-container, .pie-chart-container {
-  height: 250px;
-  width: 100%; /* Ensure charts are full-width */
-}
+  .bar-chart-container, .pie-chart-container {
+    height: 250px;
+    width: 100%;
+  }
 
-h1 {
-  font-size: 1.6rem;
-  text-align: center;
-  width: 100%;
-  margin: 0 auto; /* Center the heading */
-}
+  h1 {
+    font-size: 1.6rem;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Hamburger Icon Fix for Small Mobile */
+  .hamburger-menu {
+    position: absolute;
+    top: 3px;  /* Adjusted top position for smaller mobile devices */
+    left: 5px; /* Adjusted left position */
+    z-index: 10;
+  }
 }
