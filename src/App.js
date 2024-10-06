@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store/store';  // Import the Redux store
-import ExpensePage from './pages/ExpensePage';
-import SummaryPage from './pages/SummaryPage';
+import ExpensePage from './pages/ExpensePage/ExpensePage';
+import SummaryPage from './pages/SummaryPage/SummaryPage';
 import ExpenseFormModal from './components/ExpenseFormModal'; 
 
 

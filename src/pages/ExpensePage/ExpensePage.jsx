@@ -1,13 +1,13 @@
 import React, { useState, useMemo } from "react";
 import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';  
-import ExpenseList from "../components/ExpenseList";
-import HamburgerMenu from "../components/HamburgerMenu";
-import ExpenseSearch from "../components/ExpenseSearch"; 
-import DateFilter from "../components/DateFilter";  
-import { showModal } from "../actions/modalActions";  
-import CategoryFilter from "../components/CategoryFilter";
-import ExpenseFormModal from "../components/ExpenseFormModal"; // Import the ExpenseFormModal
+import ExpenseList from "../../components/ExpenseList";
+import HamburgerMenu from "../../components/HamburgerMenu";
+import ExpenseSearch from "../../components/ExpenseSearch"; 
+import DateFilter from "../../components/DateFilter";  
+import { showModal } from "../../actions/modalActions";  
+import CategoryFilter from "../../components/CategoryFilter";
+import ExpenseFormModal from "../../components/ExpenseFormModal"; // Import the ExpenseFormModal
 import './ExpensePage.css';
 
 export default function ExpensePage() {
