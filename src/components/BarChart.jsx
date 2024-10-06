@@ -45,8 +45,9 @@ export default function BarChart({ data }) {
       .attr('transform', `translate(0,${height - margin.bottom})`)
       .call(xAxis)
       .selectAll("text")
-      .attr("transform", "rotate(-45)")
-      .style("text-anchor", "end");
+      .style("text-anchor", "middle")  // Center-align the text
+      .style("font-size", "12px")      // Adjust font size
+      .attr("dy", "1em");              // Add space between axis and labels
 
     svg.append('g')
       .attr('transform', `translate(${margin.left}, 0)`)

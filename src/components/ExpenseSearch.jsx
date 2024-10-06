@@ -54,7 +54,7 @@ export default function ExpenseSearch() {
   };
 
   return (
-    <div style={{ marginBottom: '20px' }}>
+    <div>
       {/* Single search bar */}
       <Search
         placeholder="Search by description or amount"

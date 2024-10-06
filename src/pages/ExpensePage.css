@@ -1,0 +1,80 @@
+/* Global styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Set the body to occupy full height */
+    overflow: hidden; /* Prevent body scrolling if internal scroll is desired */
+  }
+  
+  /* Main page layout */
+  .expense-page {
+    max-width: 1250px;
+    margin: 5vh auto;  /* Center horizontally and reduce top margin */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    height: 90vh; /* Set a height relative to viewport */
+    display: flex;
+    flex-direction: column;  /* Ensure children stack vertically */
+    overflow: hidden; /* Prevent the page from scrolling */
+  }
+  
+  /* Container for Filters and Add Expense Button */
+  .filters-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px; /* Adjust spacing between the items */
+    margin-bottom: 20px;
+    margin-top: 3vh
+  }
+  
+  .filter-item {
+    flex-grow: 1; /* Ensures each filter takes equal space */
+  }
+  
+  .filter-item button {
+    width: 100%; /* Ensures the button takes full space of the div */
+  }
+  
+  /* Expense List */
+  .expense-list {
+    margin-top: 2vh;
+    width: 100%; /* Full width for the table container */
+    overflow-y: auto; /* Make the expense list scrollable */
+    flex-grow: 1; /* Allow the list to take up remaining space */
+  }
+  
+  /* Table Styling */
+  .expense-list table {
+    width: 100%; /* Ensure the table takes full width */
+    border-collapse: collapse;
+    table-layout: fixed; /* Fixed layout for equal spacing across columns */
+  }
+  
+  .expense-list th {
+    background-color: #007bff; /* Updated color for consistency */
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  
+  .expense-list td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .expense-list-container {
+    max-height: calc(100vh - 250px); /* Ensure list fits within viewport */
+    overflow-y: auto; /* Scroll within the list */
+  }
+  

@@ -5,9 +5,9 @@ import PieChart from '../components/PieChart';
 import { fetchExpenses } from '../actions/expenseActions';
 import { Row, Col, Card, Select } from 'antd';
 import HamburgerMenu from '../components/HamburgerMenu';
-import DateFilter from '../components/DateFilter'; // Reuse the DateFilter component
+import DateFilter from '../components/DateFilter'; 
 import moment from 'moment';
-
+import './SummaryPage.css'
 const { Option } = Select;
 
 export default function SummaryPage() {
@@ -64,51 +64,54 @@ export default function SummaryPage() {
   }
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
-      <HamburgerMenu />
-      <h1>Summary Page</h1>
+    <div className="summary-page-container">
+      <HamburgerMenu className="hamburger-menu" />
+      <h1 className="summary-page-title">Expense Summary</h1>
 
-      <Row gutter={16}>
-        <Col span={24}>
-          <Card style={{ marginBottom: '20px' }}>
-            <h2>Total Expenses: ${totalExpenses.toFixed(2)}</h2>
-          </Card>
+      {/* Filter Container (Date Picker + Category Selector + Total Expenses) */}
+      <Row gutter={16} className="filter-container" align="middle" style={{ marginBottom: '20px' }}>
+        <Col span={8}>
+          {/* Date Filter */}
+          <DateFilter onDateChange={handleDateChange} />
         </Col>
-
-        {/* Combine Date and Category Filters with Bar Chart in one card */}
-        <Col span={12}>
-          <Card title="Expenses by Category and Date">
-            {/* Reuse DateFilter component */}
-            <DateFilter onDateChange={handleDateChange} />
-
-            {/* Category Selector */}
-            <Select
-              mode="multiple"
-              allowClear
-              placeholder="Select Categories"
-              style={{ width: '100%', marginBottom: '20px' }}
-              onChange={setSelectedCategories}
-              value={selectedCategories}
-            >
-              {categories.map(category => (
-                <Option key={category} value={category}>
-                  {category}
-                </Option>
-              ))}
-            </Select>
-
-            {/* Bar Chart */}
-            <BarChart data={filteredExpenses} />
-          </Card>
+        <Col span={8}>
+          {/* Category Selector */}
+          <Select
+            mode="multiple"
+            allowClear
+            placeholder="Select Categories"
+            style={{ width: '100%' }}
+            onChange={setSelectedCategories}
+            value={selectedCategories}
+          >
+            {categories.map(category => (
+              <Option key={category} value={category}>
+                {category}
+              </Option>
+            ))}
+          </Select>
         </Col>
-
-        {/* Pie Chart */}
-        <Col span={12}>
-          <Card title="Expenses by Category">
-            <PieChart data={filteredExpenses} />  {/* Filtered data is passed to both charts */}
-          </Card>
+        <Col span={8} className="total-expense-container">
+          {/* Total Expenses */}
+          <h2 className="total-expense-amount">Total Expenses: ${totalExpenses.toFixed(2)}</h2>
         </Col>
       </Row>
+
+      {/* Charts Container */}
+      
+        <div className="charts-container">
+          {/* Bar Chart */}
+          <div className="bar-chart-container">
+           
+            <BarChart data={filteredExpenses} />
+          </div>
+          {/* Pie Chart */}
+          <div className="pie-chart-container">
+           
+            <PieChart data={filteredExpenses} />
+          </div>
+        </div>
+  
     </div>
   );
 }

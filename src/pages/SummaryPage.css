@@ -1,0 +1,73 @@
+/* Summary Page Container */
+.summary-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header and Filters */
+  .summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Filters (DatePicker, Category Selector) and Total Expenses */
+  .filter-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .filter-item {
+    flex: 1;
+  }
+  
+  .total-expenses {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: auto;
+    text-align: right;
+  }
+  
+  /* Charts Flexbox Container */
+  .charts-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Equal space between charts */
+    align-items: flex-start;
+    margin: 0 4vw; /* Responsive margins */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap; /* Stack on smaller screens */
+    gap: 2vw; /* Add some spacing between charts */
+  }
+  
+  .bar-chart-container, .pie-chart-container {
+    flex:1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+  }
+  
+  .pie-chart-container {
+    margin-top: 6vh; /* Remove unnecessary margin */
+  }
+  
+  /* Chart titles */
+  .chart-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+ 

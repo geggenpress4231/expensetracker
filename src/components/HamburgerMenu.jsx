@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Menu, Drawer, Button } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
+import { MenuOutlined, HomeOutlined, PlusOutlined, BarChartOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';  // Import useDispatch for Redux
 import { showModal } from '../actions/modalActions';  // Import the Redux action to show modal
+import './HamburgerMenu.css';  // Import the CSS
 
 const HamburgerMenu = () => {
   const [visible, setVisible] = useState(false);
@@ -20,26 +21,31 @@ const HamburgerMenu = () => {
 
   return (
     <>
-      <Button type="primary" icon={<MenuOutlined />} onClick={showDrawer} />
+      <Button 
+        type="primary" 
+        icon={<MenuOutlined />} 
+        onClick={showDrawer} 
+        className="hamburger-button"  // Add class for styling
+      />
       <Drawer
-        title="Menu"
         placement="left"
         closable={true}
         onClose={closeDrawer}
         visible={visible}
+        bodyStyle={{ padding: 0 }}  // Remove padding to match YouTube-like layout
       >
         <Menu
           mode="inline"
           selectedKeys={[location.pathname]} // Highlight menu item based on the current route
           onClick={closeDrawer}
         >
-          <Menu.Item key="/expense-tracker">
+          <Menu.Item key="/expense-tracker" icon={<HomeOutlined />}>
             <Link to="/expense-tracker">Expense Tracker</Link>
           </Menu.Item>
-          <Menu.Item key="add-expense" onClick={handleAddExpense}>
+          <Menu.Item key="add-expense" icon={<PlusOutlined />} onClick={handleAddExpense}>
             Add Expense
           </Menu.Item>
-          <Menu.Item key="/summary">
+          <Menu.Item key="/summary" icon={<BarChartOutlined />}>
             <Link to="/summary">Summary</Link>
           </Menu.Item>
         </Menu>

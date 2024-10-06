@@ -1,0 +1,93 @@
+/* Container for the Expense List */
+.expense-list-container {
+    margin-top: 2vh;
+    padding: 0; /* Remove padding to avoid header displacement */
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: 400px;  /* Set a max-height to the container */
+    overflow-y: auto;   /* Enable vertical scrolling if content exceeds max-height */
+    position: relative;
+    width: 100%;  /* Make sure the table container takes the full width of its parent */
+  }
+  
+  /* Table Styling */
+  .expense-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Ensures equal column widths */
+    font-family: 'Roboto', sans-serif;
+    background-color: white; /* Solid background for the table itself */
+    border-radius: 8px;
+    position: relative;
+  }
+  
+  /* Table Headers */
+  .expense-list-table th {
+    background-color: #007bff; /* Solid background for the header */
+    color: white;
+    text-align: left;
+    padding: 12px;
+    font-weight: 500;
+    font-size: 14px;
+    border-bottom: 2px solid #e0e0e0;
+    white-space: nowrap;
+    position: sticky;  /* Make the header sticky */
+    top: 0;            /* Stick to the top of the container */
+    z-index: 100;       /* Ensure it stays above table rows when scrolling */
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for better visibility */
+  }
+  
+  /* Table Rows */
+  .expense-list-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Fixed column widths for better alignment */
+  .expense-list-table th:first-child,
+  .expense-list-table td:first-child {
+    width: 15%; /* Date */
+  }
+  
+  .expense-list-table th:nth-child(2),
+  .expense-list-table td:nth-child(2) {
+    width: 15%; /* Category */
+  }
+  
+  .expense-list-table th:nth-child(3),
+  .expense-list-table td:nth-child(3) {
+    width: 45%; /* Description */
+  }
+  
+  .expense-list-table th:nth-child(4),
+  .expense-list-table td:nth-child(4) {
+    width: 15%; /* Amount */
+    text-align: right; /* Align amount to the right */
+  }
+  
+  .expense-list-table th:last-child,
+  .expense-list-table td:last-child {
+    width: 10%; /* Options (Icons) */
+    text-align: center;
+  }
+  
+  /* Row Hover Effect */
+  .expense-list-table tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  /* No Expenses Message */
+  .no-expenses-message {
+    text-align: center;
+    color: #999;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  

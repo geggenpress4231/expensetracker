@@ -46,11 +46,12 @@ export default function PieChart({ data }) {
           .style("visibility", "visible")
           .html(`<strong>${d.data[0]}</strong><br/>Amount: $${d.data[1].toFixed(2)}`);
       })
-      .on('mousemove', function(event, d) {
-        const [x, y] = d3.pointer(event, svg.node());
+      .on('mousemove', function(event) {
+        const svgPosition = svgRef.current.getBoundingClientRect(); // Get the position of the SVG relative to the viewport
+        const [x, y] = d3.pointer(event); // Use d3.pointer for relative position within the SVG
         tooltip
-          .style("left", `${x + 10}px`)
-          .style("top", `${y + 10}px`);
+          .style("left", `${x + svgPosition.left + 10}px`)  // Adjust tooltip position relative to the SVG container
+          .style("top", `${y + svgPosition.top + 10}px`);
       })
       .on('mouseout', function() {
         d3.select(this).transition().duration(200).attr('opacity', 1);

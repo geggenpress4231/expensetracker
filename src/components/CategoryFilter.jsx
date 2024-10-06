@@ -6,7 +6,6 @@ const { Option } = Select;
 export default function CategoryFilter({ categories, onCategoryChange }) {
   return (
     <Select
-      style={{ width: '100%' }}
       placeholder="Select Category"
       onChange={onCategoryChange}
       allowClear

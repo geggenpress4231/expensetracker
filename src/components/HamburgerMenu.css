@@ -1,0 +1,62 @@
+/* Styles for the HamburgerMenu component */
+
+/* Hamburger Button Style */
+.hamburger-button {
+    position: absolute;
+    top: 55px;
+    left: 20px;
+    background-color: #007bff;
+    border-radius: 50%;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .hamburger-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Drawer Styles */
+  .ant-drawer-content {
+    background-color: #f9f9f9;
+  }
+  
+  /* Menu Styles */
+  .ant-menu {
+    background-color: #f9f9f9;
+    border-right: none;
+    padding-top: 20px;  /* Add spacing at the top to align items like YouTube */
+  }
+  
+  .ant-menu-item {
+    padding: 15px 24px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    color: #333;
+  }
+  
+  .ant-menu-item:hover {
+    background-color: #e6f7ff;
+    color: #007bff;
+  }
+  
+  .ant-menu-item .anticon {
+    margin-right: 16px;
+    font-size: 20px;
+  }
+  
+  .ant-menu-item-selected {
+    background-color: #e6f7ff;
+    color: #007bff;
+  }
+  
+  /* Selected Menu Item */
+  .ant-menu-item-selected:hover {
+    background-color: #cceeff;
+  }
+  
+  .ant-menu-item a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
