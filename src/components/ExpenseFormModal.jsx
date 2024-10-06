@@ -1,23 +1,26 @@
 import React from 'react';
 import { Modal } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';  // Import useSelector and useDispatch from Redux
+import { useSelector, useDispatch } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
-import { hideModal } from '../actions/modalActions';  // Import hideModal action
+import { hideModal } from '../actions/modalActions';
 
 const ExpenseFormModal = () => {
   const dispatch = useDispatch();
   
-  // Access modal state from Redux using useSelector
   const isModalVisible = useSelector((state) => state.modal.isModalVisible);
   const editingExpense = useSelector((state) => state.modal.editingExpense);
 
   const handleCancel = () => {
-    dispatch(hideModal());  // Dispatch the hideModal action
+    dispatch(hideModal());
   };
 
   return (
     <Modal
-      title={editingExpense ? "Edit Expense" : "Add New Expense"}
+      title={
+        <div style={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 'bold', color: '#2C3E50' }}>
+          {editingExpense ? "Edit Expense" : "Add New Expense"}
+        </div>
+      }
       visible={isModalVisible}
       onCancel={handleCancel}
       footer={null}
