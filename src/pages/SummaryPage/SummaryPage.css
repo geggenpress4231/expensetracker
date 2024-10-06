@@ -103,9 +103,9 @@ h1 {
 .total-expenses {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #2C3E50; /* Professional dark tone */
+    color: #2C3E50; 
     text-align: left;
-    white-space: nowrap; /* Keep text on a single line */
-    margin-left: 0; /* Remove or reduce left margin to shift it more to the left */
+    white-space: nowrap;
+    margin-left: 0;
 }
 
