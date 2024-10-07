@@ -40,44 +40,71 @@ npm start
 ```
 ## Tools and Packages Used
 
-This project makes use of several key tools and libraries to enhance functionality and development experience. Below is a list of the most important dependencies used:
+This project makes use of several key tools and libraries to enhance functionality and development experience. Below is a list of the most important dependencies and how they are used in this application:
 
 ### 1. **@reduxjs/toolkit** - `^2.2.7`
-   A modern, opinionated way to write Redux logic, featuring simplified configuration and usage of Redux.
+   Used for efficient state management in the application. It simplifies Redux logic for managing global state, especially for handling expenses and filtering operations throughout the app.
 
 ### 2. **antd** - `^5.21.2`
-   A popular UI component library based on React, used for creating beautiful and responsive designs quickly.
+   Utilized as the primary UI component library for the project. It provides pre-built components such as buttons, forms, modals, and tables, ensuring a responsive and visually consistent interface across the application.
 
 ### 3. **axios** - `^1.7.7`
-   A promise-based HTTP client for making requests to external APIs, used in this project for API communication.
+   Used for handling HTTP requests in the app. Axios is responsible for making API calls to the **JSON Server** to fetch, add, update, and delete expense data, facilitating seamless interaction with the backend.
 
 ### 4. **d3** - `^7.9.0`
-   A powerful library for creating data visualizations with SVG, used in this project for building charts and graphs.
+   Used for building custom data visualizations such as bar and pie charts. D3 powers the dynamic rendering of charts that visually represent the expense data, providing users with clear insights into their spending habits.
 
 ### 5. **lodash** - `^4.17.21`
-   A utility library delivering performance and ease-of-use for common JavaScript functions such as manipulating arrays and objects.
+   A utility library used throughout the app to perform data manipulation tasks such as filtering, sorting, and aggregating expense data efficiently. It reduces the need for complex JavaScript functions, ensuring cleaner code.
 
 ### 6. **moment** - `^2.30.1`
-   A date manipulation library used for handling, formatting, and displaying dates in the application.
+   Moment is used for handling date formatting and manipulation, especially for filtering expenses by date range. It helps in comparing, formatting, and displaying dates in a user-friendly manner.
 
 ### 7. **react** - `^18.3.1`
-   The core library for building user interfaces, utilized for creating interactive components.
+   React is the core library used for building the entire front-end of the application. It enables the creation of reusable components that manage UI state and render dynamically as users interact with the app.
 
 ### 8. **react-dom** - `^18.3.1`
-   The entry point to the DOM rendering functionality for React.
+   This package is used to connect React components to the browser's DOM, allowing the UI to be rendered and updated efficiently in response to user actions.
 
 ### 9. **react-icons** - `^5.3.0`
-   A library providing popular icons from various icon sets for easy integration into the React components.
+   Provides a wide range of icons used throughout the application, such as edit and delete buttons in the expense list. It helps enhance the UI by providing consistent and easily recognizable visual elements.
 
-### 10. **react-redux** - `^9.1.2`
-   Official bindings for integrating Redux with React, making it easier to manage state in the application.
-
-### 11. **react-router-dom** - `^6.26.2`
-   A routing library for React, used for handling navigation and URL management in the application.
-
-### 12. **react-scripts** - `5.0.1`
-   Scripts and configuration for building and running Create React App projects.
+### 10. **react-router-dom** - `^6.26.2`
+   Manages client-side routing in the app. It allows seamless navigation between different pages, such as the Expense List and Summary pages, without reloading the entire app.
 
 ---
 
-These are the essential libraries and tools that power this project, providing everything from state management and API handling to data visualization and routing.
+These libraries and tools are crucial to the functionality and user experience of the app, managing everything from state management and UI design to data visualization and API interactions.
+
+
+## Assumptions and Instructions for Optional Features
+
+### 1. **Date Range Picker**
+   - Assumption: The user will be able to pick both start and end dates. If no date range is selected, all expenses will be displayed by default.
+   - When a date range is selected, the app filters expenses that fall within the selected range and updates both the expense list and the charts accordingly.
+   - If only one date (start or end) is selected, the app assumes the user wants to see all expenses up to or starting from that date.
+
+### 2. **Category Picker**
+   - Assumption: By default, all categories are shown unless a specific category is selected.
+   - The app assumes that the category picker allows the user to filter expenses by one or more categories. Selecting "All" resets the filter, showing all categories.
+
+### 3. **Search by Description or Amount**
+   - Assumption: The search functionality can be used to filter expenses by both **description** (partial or full matches) and **amount** (exact match).
+   - The search bar assumes that the user input is case-insensitive for descriptions.
+   - For amounts, the app expects numerical input. If the user inputs non-numeric values, no expenses will be returned.
+   - The app updates the list and charts in real-time as the user types in the search bar.
+
+### 4. **Bar Chart and Pie Chart**
+   - Assumption: The charts update dynamically based on the filters applied (date range, category, search).
+   - The **Bar Chart** shows the total expenses per category for the given filters, while the **Pie Chart** visualizes the percentage distribution of expenses across categories.
+   - If no data matches the filters, both charts will show an empty state or zero values.
+
+### 5. **General Instructions for Testing**
+   - Ensure the **JSON Server** is running locally on [http://localhost:5000](http://localhost:5000) before testing any of the filtering or chart functionalities.
+   - Test different combinations of date ranges, categories, and search queries to see the dynamic changes in the expense list and charts.
+   - Try adding new expenses via the app and verify that the newly added expenses appear in both the list and the charts.
+
+---
+
+This section covers assumptions about how the date range picker, category picker, search bar, and charts are expected to function, as well as instructions to ensure proper testing.
+
