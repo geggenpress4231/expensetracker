@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteExpense, fetchExpenses } from "../../actions/expenseActions";
 import moment from 'moment';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';  // Importing FontAwesome icons
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import './ExpenseList.css';
 
 export default function ExpenseList({ onEditExpense, searchParams, selectedDateRange, selectedCategories }) {
@@ -43,7 +43,6 @@ export default function ExpenseList({ onEditExpense, searchParams, selectedDateR
         ? expense.description.toLowerCase().includes(searchParams.description.toLowerCase())
         : true;
 
-      // Ensure categories are matched case-insensitively and handle 'All'
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes("All")
         ? true
         : selectedCategories.some((category) => category.toLowerCase() === expense.category.toLowerCase());

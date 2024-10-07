@@ -7,25 +7,25 @@ import ExpenseSearch from "../../components/ExpenseSearch";
 import DateFilter from "../../components/DateFilter";  
 import { showModal } from "../../actions/modalActions";  
 import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
-import ExpenseFormModal from "../../components/ExpenseFormModal"; // Import the ExpenseFormModal
+import ExpenseFormModal from "../../components/ExpenseFormModal";
 import './ExpensePage.css';
 
 export default function ExpensePage() {
   const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useState({}); // State for search parameters
-  const [selectedDateRange, setSelectedDateRange] = useState([null, null]); // Date filter state
-  const [selectedCategories, setSelectedCategories] = useState([]); // Category filter state
+  const [searchParams, setSearchParams] = useState({ description: '', amount: '' });
+  const [selectedDateRange, setSelectedDateRange] = useState([null, null]); 
+  const [selectedCategories, setSelectedCategories] = useState([]); 
 
-  const expenses = useSelector((state) => state.expenses.expenses); // Assuming expenses come from Redux store
+  const expenses = useSelector((state) => state.expenses.expenses);
 
   // Show modal for Add or Edit Expense
   const showModalHandler = (expense = null) => {
     dispatch(showModal(expense));  
   };
 
-  // Handle search (passed to the ExpenseSearch component)
+  // Handle search (from ExpenseSearch component)
   const handleSearch = (params) => {
-    setSearchParams(params); 
+    setSearchParams(params);
   };
 
   // Handle date change for DateFilter
@@ -44,7 +44,7 @@ export default function ExpensePage() {
 
       <h1 className="expense-page-title">Expense Tracker</h1>
 
-      {/* Search, Filters, and Add Expense Button in individual divs */}
+      {/* Search, Filters, and Add Expense Button */}
       <div className="filters-container">
         <div className="filter-item">
           <DateFilter onDateChange={handleDateChange} aria-label="Filter expenses by date" />
@@ -73,16 +73,16 @@ export default function ExpensePage() {
         </div>
       </div>
 
-      {/* Expense List - pass down filter state as props */}
+      {/* Expense List */}
       <ExpenseList 
         onEditExpense={showModalHandler} 
         searchParams={searchParams} 
         selectedDateRange={selectedDateRange} 
-        selectedCategories={selectedCategories}  // Passing selectedCategories correctly
+        selectedCategories={selectedCategories}
         aria-label="List of filtered expenses"
       />
 
-      {/* Use ExpenseFormModal to handle the modal display */}
+      {/* Modal for Adding or Editing Expense */}
       <ExpenseFormModal />
     </div>
   );

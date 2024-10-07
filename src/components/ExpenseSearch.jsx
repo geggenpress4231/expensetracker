@@ -6,24 +6,22 @@ import debounce from 'lodash.debounce';
 
 const { Search } = Input;
 
-export default function ExpenseSearch() {
-  const dispatch = useDispatch();
+export default function ExpenseSearch({ onSearch }) {  // Use a callback to send search params to parent
   const [query, setQuery] = useState('');
 
   // Debounced search handler
   const debouncedSearch = useCallback(
     debounce((searchText) => {
       const searchParams = parseQuery(searchText);
-      dispatch(updateSearchParams(searchParams)); // Dispatch search parameters to Redux store
-    }, 500), // 500ms debounce delay
-    [dispatch]
+      onSearch(searchParams); // Call parent function to update search parameters
+    }, 500),  // 500ms debounce delay
+    [onSearch]
   );
 
-  // Handle input change with debounced search
   const handleSearchChange = (e) => {
     const searchText = e.target.value;
     setQuery(searchText);
-    debouncedSearch(searchText); // Trigger the debounced search
+    debouncedSearch(searchText);  // Trigger debounced search
   };
 
   // Function to parse the input and separate description and amount
@@ -39,14 +37,9 @@ export default function ExpenseSearch() {
       // Check if the term is numeric (for amount)
       if (!isNaN(term)) {
         searchParams.amount = parseFloat(term);
-      }
-      // Treat remaining terms as description
-      else {
-        if (searchParams.description) {
-          searchParams.description += ` ${term}`; // Concatenate description terms
-        } else {
-          searchParams.description = term;
-        }
+      } else {
+        // Treat remaining terms as description
+        searchParams.description += ` ${term}`.trim(); // Ensure there's no extra space
       }
     });
 
@@ -54,15 +47,11 @@ export default function ExpenseSearch() {
   };
 
   return (
-  
-      <Search
-        placeholder="Search"
-        value={query}
-        onChange={handleSearchChange} // Call debounced search on input change
-        allowClear
-        
-      />
-   
-    
+    <Search
+      placeholder="Search by description or amount"
+      value={query}
+      onChange={handleSearchChange}
+      allowClear
+    />
   );
 }
