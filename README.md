@@ -1,4 +1,4 @@
-# Project Setup Guide
+# Expense Tracker
 
 ## Prerequisites
 
@@ -6,7 +6,7 @@ Before running this project, ensure you have the following installed:
 
 - **Node.js** (version >= 14.x.x recommended)  
 - **npm** (comes with Node.js)
-- **JSON Server** (for mocking API data)
+- **IDE e.g. VSCode**
 
 ## Installation Steps
 
@@ -29,9 +29,12 @@ npm install
 
 This project uses **JSON Server** to mock a RESTful API. Follow these steps to set up JSON Server:
 
-### a. Open a terminal window
+### Open a terminal window
 
 ```bash
 json-server --watch db.json --port 5000
 ```
-
+### In a separate terminal window
+```bash
+npm start
+```
