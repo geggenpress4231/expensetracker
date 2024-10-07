@@ -6,7 +6,7 @@ import debounce from 'lodash.debounce';
 
 const { Search } = Input;
 
-export default function ExpenseSearch({ onSearch }) {  // Use a callback to send search params to parent
+export default function ExpenseSearch({ onSearch }) {  // Using a callback to send search params to parent
   const [query, setQuery] = useState('');
 
   // Debounced search handler

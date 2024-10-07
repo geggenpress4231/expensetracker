@@ -6,8 +6,8 @@
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;  /* Ensure the content can scroll vertically */
-  max-height: 100vh;  /* Limit height to viewport */
+  overflow-y: auto;  
+  max-height: 100vh; 
 }
 
 /* Filters and Total Expenses Container */
@@ -56,8 +56,8 @@
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  flex-wrap: wrap; /* Allow charts to wrap on smaller screens */
-  overflow-y: auto;  /* Ensure charts container can scroll */
+  flex-wrap: wrap; 
+  overflow-y: auto;  
 }
 
 /* Bar and Pie Chart Containers */
@@ -67,7 +67,7 @@
   align-items: center;
   justify-content: center;
   height: 400px;
-  max-height: 100%;  /* Ensure charts don't overflow */
+  max-height: 100%;  
 }
 
 .pie-chart-container {
@@ -77,23 +77,23 @@
 
 /* Styling for the Select Category */
 .filter-item .ant-select {
-  width: 80%;  /* Reduce the width to 80% for a more compact look */
-  max-width: 300px; /* Optional: Set a maximum width to prevent it from getting too wide */
+  width: 80%; 
+  max-width: 300px; 
 }
 
 .filter-item .ant-select-selector {
-  height: 40px; /* Adjust height if needed */
-  font-size: 14px; /* Make the text size smaller */
+  height: 40px; 
+  font-size: 14px;
 }
 
 /* Styling for the h1 (Expense Summary title) */
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #2C3E50; /* Professional deep navy/dark gray */
+  color: #2C3E50; 
   text-align: center;
   margin-bottom: 20px;
-  font-family: 'Lato', sans-serif; /* Modern and professional font */
+  font-family: 'Lato', sans-serif; 
   letter-spacing: 0.5px;
 }
 
@@ -118,11 +118,11 @@ h1 {
     width: 48%;
   }
 
-  /* Hamburger Icon Fix for Tablets */
+
   .hamburger-menu {
     position: absolute;
-    top: 15px;  /* Adjusted top position for larger tablets */
-    left: 20px; /* Adjusted left position */
+    top: 15px;  
+    left: 20px; 
     z-index: 10;
   }
 }
@@ -168,11 +168,11 @@ h1 {
     font-size: 1.8rem;
   }
 
-  /* Hamburger Icon Fix for Mobile */
+
   .hamburger-menu {
     position: absolute;
-    top: 3px;  /* Adjusted top position for smaller devices */
-    left: 5px; /* Adjusted left position */
+    top: 3px;  
+    left: 5px;
     z-index: 10;
   }
 }
@@ -221,11 +221,11 @@ h1 {
     margin: 0 auto;
   }
 
-  /* Hamburger Icon Fix for Small Mobile */
+  
   .hamburger-menu {
     position: absolute;
-    top: 3px;  /* Adjusted top position for smaller mobile devices */
-    left: 5px; /* Adjusted left position */
+    top: 3px; 
+    left: 5px; 
     z-index: 10;
   }
 }

@@ -73,7 +73,7 @@ export default function SummaryPage() {
         <div className="filter-item">
           <DateFilter 
             onDateChange={handleDateChange} 
-            aria-label="Filter expenses by date"  // Accessibility improvement 
+            aria-label="Filter expenses by date" 
           />
         </div>
 
@@ -83,7 +83,7 @@ export default function SummaryPage() {
             onCategoryChange={setSelectedCategories}
             selectedCategories={selectedCategories}
             allowMultiple={true}  // Enable multi-select
-            aria-label="Filter expenses by category"  // Accessibility improvement
+            aria-label="Filter expenses by category"  
           />
         </div>
 
@@ -97,14 +97,14 @@ export default function SummaryPage() {
         <div className="bar-chart-container">
           <BarChart 
             data={filteredExpenses} 
-            aria-label="Bar chart showing filtered expenses"  // Accessibility improvement
+            aria-label="Bar chart showing filtered expenses"  
           />
         </div>
 
         <div className="pie-chart-container">
           <PieChart 
             data={filteredExpenses} 
-            aria-label="Pie chart showing expense distribution by category"  // Accessibility improvement
+            aria-label="Pie chart showing expense distribution by category"  
           />
         </div>
       </div>

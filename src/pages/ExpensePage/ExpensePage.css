@@ -31,36 +31,36 @@ body {
     margin-bottom: 2vh;
 }
 
-/* Ensure all filter items, including search, have consistent height */
+
 .filter-item {
     flex-grow: 1;
-    height: 45px; /* Set a consistent height for all filter items */
+    height: 45px; 
     display: flex;
-    align-items: center; /* Vertically center content within filter items */
+    align-items: center; 
 }
 
-/* Make the first filter item (nth-child 1) grow bigger */
+
 .filters-container .filter-item:nth-child(1) {
-    flex-grow: 2; /* Increase flex-grow to make it bigger */
+    flex-grow: 2; 
 }
 
 /* Margin adjustment for better spacing after nth-child(2) */
 .filters-container .filter-item:nth-child(2) {
-    margin-right: 15vw; /* Reduce the margin to make it tighter */
+    margin-right: 15vw; 
 }
 
 /* Align self for the last two filter items */
 .filters-container .filter-item:nth-child(3),
 .filters-container .filter-item:nth-child(4) {
     align-self: flex-end;
-    flex-grow: 1; /* Align the search bar and button to the bottom */
+    flex-grow: 1; 
 }
 
 
 /* Specific styles for search input to ensure it fills the height */
 .expense-search {
     width: 100%;
-    height: 100%; /* Ensure it takes the full height of the parent */
+    height: 100%; 
     border-radius: 4px;
     padding: 8px;
     font-size: 14px;
@@ -69,7 +69,7 @@ body {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Additional styling for input focus to match professional look */
+
 .expense-search:focus {
     border-color: #2C3E50;
     outline: none;
@@ -78,7 +78,7 @@ body {
 
 /* Table styling */
 .expense-list th {
-    background-color: #2C3E50; /* Darker, more professional navy */
+    background-color: #2C3E50;
     color: white;
     padding: 12px;
     text-align: left;
@@ -107,7 +107,7 @@ body {
     width: auto;
     min-width: 120px;
     border-radius: 4px;
-    background-color: #2C3E50; /* Deep navy for a professional look */
+    background-color: #2C3E50; 
 }
 
 .expense-page .add-expense-btn:hover {
@@ -122,40 +122,40 @@ body {
 h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #2c3e50; /* A solid dark navy color for professionalism */
+    color: #2c3e50; 
     text-align: center;
     margin-bottom: 25px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-family: 'Lato', sans-serif; /* A clean and modern font */
-    border-bottom: 2px solid #dcdcdc; /* Adding an underline effect for separation */
-    padding-bottom: 10px; /* Extra space for better readability */
-    margin-top: 10px; /* Slight margin at the top */
+    font-family: 'Lato', sans-serif; 
+    border-bottom: 2px solid #dcdcdc; 
+    padding-bottom: 10px; 
+    margin-top: 10px; 
 }
 
 /* Total Expenses Styling */
 .summary-page-total-expenses h2 {
     font-size: 1.6rem;
     font-weight: 600;
-    color: #555555; /* Neutral dark gray for balance */
+    color: #555555; 
     text-align: left;
     font-family: 'Lato', sans-serif;
 }
 
 @media (max-width: 768px) {
     .filters-container {
-      flex-direction: column; /* Stack search and button vertically */
-      align-items: stretch; /* Make the items take full width */
+      flex-direction: column; 
+      align-items: stretch; 
     }
   
     .filters-container .filter-item:nth-child(3),
     .filters-container .filter-item:nth-child(4) {
-      width: 100%; /* Make the search and button take full width */
+      width: 100%; 
       align-self: center;
     }
   
     .filters-container .filter-item:nth-child(4) {
-      margin-top: 1vh; /* Add a small gap between search and button */
+      margin-top: 1vh; 
     }
 }
 
@@ -165,7 +165,7 @@ h1 {
       padding: 2vh 3vw;
     }
   
-    /* Adjust filter container to show category and search side by side */
+   
     .filters-container {
       display: flex;
       flex-wrap: wrap;
@@ -174,17 +174,17 @@ h1 {
       gap: 15px;
     }
   
-    /* Ensure category and search inputs are side by side */
+  
     .filter-item {
       flex: 1;
       min-width: 200px;
-      max-width: 45%; /* Ensure they fit nicely on the same line */
+      max-width: 45%; 
     }
   
     /* Adjust category and search width for side-by-side layout */
     .filter-item .ant-select, 
     .filter-item .ant-picker,
-    .filter-item .search-input {  /* Assuming you have a specific class for the search input */
+    .filter-item .search-input {  
       width: 100%;
     }
   
@@ -192,6 +192,6 @@ h1 {
     .add-expense-btn-container {
       width: 100%;
       text-align: center;
-      margin-top: 10px;  /* Add some margin to create space between the filters and button */
+      margin-top: 10px;  
     }
 }

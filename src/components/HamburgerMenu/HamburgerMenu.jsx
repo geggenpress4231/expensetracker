@@ -29,11 +29,11 @@ const HamburgerMenu = () => {
       />
       <Drawer
         placement="left"
-        closable={false}  // Remove close button
+        closable={false}  
         onClose={closeDrawer}
         visible={visible}
-        bodyStyle={{ padding: 0, backgroundColor: '#f4f6f9' }}  // Set background color for the drawer
-        width={220}  // Make the drawer a bit smaller
+        bodyStyle={{ padding: 0, backgroundColor: '#f4f6f9' }}  
+        width={220}  
       >
        
         <Menu
