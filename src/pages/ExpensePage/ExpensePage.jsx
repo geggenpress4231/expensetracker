@@ -78,7 +78,7 @@ export default function ExpensePage() {
         onEditExpense={showModalHandler} 
         searchParams={searchParams} 
         selectedDateRange={selectedDateRange} 
-        selectedCategories={selectedCategories}  // Changed to plural as it's a multi-select
+        selectedCategories={selectedCategories}  // Passing selectedCategories correctly
         aria-label="List of filtered expenses"
       />
 

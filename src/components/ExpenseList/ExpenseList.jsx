@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteExpense, fetchExpenses } from "../../actions/expenseActions";
 import moment from 'moment';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';  // Importing FontAwesome icons
-import './ExpenseList.css'
+import './ExpenseList.css';
 
-export default function ExpenseList({ onEditExpense, searchParams, selectedDateRange, selectedCategory }) {
+export default function ExpenseList({ onEditExpense, searchParams, selectedDateRange, selectedCategories }) {
   const dispatch = useDispatch();
   const expenses = useSelector((state) => state.expenses.expenses);
 
@@ -43,9 +43,10 @@ export default function ExpenseList({ onEditExpense, searchParams, selectedDateR
         ? expense.description.toLowerCase().includes(searchParams.description.toLowerCase())
         : true;
 
-      const matchesCategory = selectedCategory === "All" || !selectedCategory
+      // Ensure categories are matched case-insensitively and handle 'All'
+      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes("All")
         ? true
-        : expense.category.toLowerCase() === selectedCategory.toLowerCase();
+        : selectedCategories.some((category) => category.toLowerCase() === expense.category.toLowerCase());
 
       const matchesAmount = searchParams.amount
         ? expense.amount === parseFloat(searchParams.amount)
@@ -55,7 +56,7 @@ export default function ExpenseList({ onEditExpense, searchParams, selectedDateR
 
       return matchesDescription && matchesCategory && matchesAmount && matchesDate;
     });
-  }, [expenses, searchParams, selectedCategory, selectedDateRange]);
+  }, [expenses, searchParams, selectedCategories, selectedDateRange]);
 
   const sortedExpenses = useMemo(() => {
     return [...filteredExpenses].sort((a, b) => new Date(b.date) - new Date(a.date));
