@@ -55,26 +55,21 @@ This project makes use of several key tools and libraries to enhance functionali
    Used for building custom data visualizations such as bar and pie charts. D3 powers the dynamic rendering of charts that visually represent the expense data, providing users with clear insights into their spending habits.
 
 ### 5. **lodash** - `^4.17.21`
-   A utility library used throughout the app to perform data manipulation tasks such as filtering, sorting, and aggregating expense data efficiently. It reduces the need for complex JavaScript functions, ensuring cleaner code.
+   A utility library used throughout the app to perform data manipulation tasks such as filtering, sorting, and aggregating expense data efficiently. It has been used to implement debouncing for Search Component.
 
 ### 6. **moment** - `^2.30.1`
    Moment is used for handling date formatting and manipulation, especially for filtering expenses by date range. It helps in comparing, formatting, and displaying dates in a user-friendly manner.
 
-### 7. **react** - `^18.3.1`
-   React is the core library used for building the entire front-end of the application. It enables the creation of reusable components that manage UI state and render dynamically as users interact with the app.
-
-### 8. **react-dom** - `^18.3.1`
+### 7. **react-dom** - `^18.3.1`
    This package is used to connect React components to the browser's DOM, allowing the UI to be rendered and updated efficiently in response to user actions.
 
-### 9. **react-icons** - `^5.3.0`
+### 8. **react-icons** - `^5.3.0`
    Provides a wide range of icons used throughout the application, such as edit and delete buttons in the expense list. It helps enhance the UI by providing consistent and easily recognizable visual elements.
 
-### 10. **react-router-dom** - `^6.26.2`
+### 9. **react-router-dom** - `^6.26.2`
    Manages client-side routing in the app. It allows seamless navigation between different pages, such as the Expense List and Summary pages, without reloading the entire app.
 
 ---
-
-These libraries and tools are crucial to the functionality and user experience of the app, managing everything from state management and UI design to data visualization and API interactions.
 
 
 ## Assumptions and Instructions for Optional Features
@@ -106,5 +101,5 @@ These libraries and tools are crucial to the functionality and user experience o
 
 ---
 
-This section covers assumptions about how the date range picker, category picker, search bar, and charts are expected to function, as well as instructions to ensure proper testing.
+
 
