@@ -13,8 +13,8 @@ export default function ExpenseSearch({ onSearch }) {  // Use a callback to send
   const debouncedSearch = useCallback(
     debounce((searchText) => {
       const searchParams = parseQuery(searchText);
-      onSearch(searchParams); // Call parent function to update search parameters
-    }, 500),  // 500ms debounce delay
+      onSearch(searchParams); 
+    }, 500),  
     [onSearch]
   );
 
@@ -48,7 +48,7 @@ export default function ExpenseSearch({ onSearch }) {  // Use a callback to send
 
   return (
     <Search
-      placeholder="Search by description or amount"
+      placeholder="Search" 
       value={query}
       onChange={handleSearchChange}
       allowClear

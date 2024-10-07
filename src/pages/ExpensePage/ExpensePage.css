@@ -39,6 +39,16 @@ body {
     align-items: center; /* Vertically center content within filter items */
 }
 
+/* Make the first filter item (nth-child 1) grow bigger */
+.filters-container .filter-item:nth-child(1) {
+    flex-grow: 2; /* Increase flex-grow to make it bigger */
+}
+
+/* Margin adjustment for better spacing after nth-child(2) */
+.filters-container .filter-item:nth-child(2) {
+    margin-right: 15vw; /* Reduce the margin to make it tighter */
+}
+
 /* Align self for the last two filter items */
 .filters-container .filter-item:nth-child(3),
 .filters-container .filter-item:nth-child(4) {
@@ -46,10 +56,6 @@ body {
     flex-grow: 1; /* Align the search bar and button to the bottom */
 }
 
-/* Margin adjustment for better spacing */
-.filters-container .filter-item:nth-child(2) {
-    margin-right: 28vw; /* Add margin between search and button */
-}
 
 /* Specific styles for search input to ensure it fills the height */
 .expense-search {

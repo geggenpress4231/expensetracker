@@ -2,21 +2,21 @@
 .expense-list-container {
   margin-top: 2vh;
   padding: 0;
-  background-color: #f8f9fa; /* Light grey for a clean, professional background */
+  background-color: #f8f9fa; 
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-height: 50vh; /* Use a percentage of viewport height for better responsiveness */
+  max-height: 50vh; 
   overflow-y: auto;
   position: relative;
   width: 100%;
-  box-sizing: border-box; /* Ensure padding and borders don’t affect the width */
+  box-sizing: border-box; 
 }
 
 /* Table Styling */
 .expense-list-table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: auto; /* Changed to auto for better content distribution */
+  table-layout: auto; 
   font-family: 'Roboto', sans-serif;
   background-color: white;
   border-radius: 8px;
@@ -28,7 +28,7 @@
   background-color: #003366; /* Dark blue for a more refined header background */
   color: white;
   text-align: center;
-  padding: 12px; /* Adjusted padding for better responsiveness */
+  padding: 12px;
   font-weight: 600;
   font-size: 14px;
   border-bottom: 2px solid #d1d1d1;
@@ -54,7 +54,7 @@
 /* Column widths */
 .expense-list-table th:first-child,
 .expense-list-table td:first-child {
-  width: 20%; /* Increased width for more space on smaller screens */
+  width: 20%; 
 }
 
 .expense-list-table th:nth-child(2),
@@ -64,7 +64,7 @@
 
 .expense-list-table th:nth-child(3),
 .expense-list-table td:nth-child(3) {
-  width: 40%; /* Adjusted to keep the description wider */
+  width: 40%; 
 }
 
 .expense-list-table th:nth-child(4),
@@ -74,7 +74,7 @@
 
 .expense-list-table th:last-child,
 .expense-list-table td:last-child {
-  width: 5%; /* Reduced width for options column */
+  width: 5%; 
 }
 
 /* Row Hover Effect */
@@ -94,29 +94,29 @@
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
   .expense-list-container {
-      max-height: 60vh; /* Adjust container height on smaller screens */
+      max-height: 60vh; 
   }
   
   .expense-list-table th,
   .expense-list-table td {
-      font-size: 12px; /* Reduce font size for smaller screens */
-      padding: 10px; /* Adjust padding for smaller screens */
+      font-size: 12px;
+      padding: 10px; 
   }
   
   .expense-list-table th:first-child,
   .expense-list-table td:first-child,
   .expense-list-table th:nth-child(2),
   .expense-list-table td:nth-child(2) {
-      width: 25%; /* Increase the width for date and category on small screens */
+      width: 25%; 
   }
 
   .expense-list-table th:nth-child(3),
   .expense-list-table td:nth-child(3) {
-      width: 35%; /* Slight reduction on smaller screens */
+      width: 35%; 
   }
   
   .expense-list-table th:last-child,
   .expense-list-table td:last-child {
-      width: 10%; /* Slightly increase options column on smaller screens */
+      width: 10%; 
   }
 }
