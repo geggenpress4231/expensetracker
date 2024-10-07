@@ -54,14 +54,14 @@ export default function ExpenseForm({ onSubmit, expense }) {
   };
 
   const handleSearch = (searchText) => {
-    if (searchText) {
+    if (searchText && searchText.length > 0 && /^[a-zA-Z]+/.test(searchText)) { // Ensure first character is a letter
       setFilteredSuggestions(
         suggestions.filter((desc) =>
           desc.toLowerCase().startsWith(searchText.toLowerCase())
         )
       );
     } else {
-      setFilteredSuggestions([]);
+      setFilteredSuggestions([]); // Clear suggestions when searchText is empty or doesn't start with an alphabet
     }
   };
 
@@ -145,28 +145,27 @@ export default function ExpenseForm({ onSubmit, expense }) {
       </Form.Item>
 
       <Form.Item>
-      <Button
-  type="primary"
-  htmlType="submit"
-  block
-  className="submit-btn"
-  aria-label="Submit expense form"
-  style={{ 
-    backgroundColor: '#1a1f71',  // Darker navy base color
-    borderColor: '#1a1f71', 
-    color: '#ffffff',
-    transition: 'background-color 0.3s ease'  // Smooth transition for color
-  }}
-  onMouseEnter={(e) => {
-    e.target.style.backgroundColor = '#3c4dbd';  // Lighter shade on hover
-  }}
-  onMouseLeave={(e) => {
-    e.target.style.backgroundColor = '#1a1f71';  // Reset to original color
-  }}
->
-  Submit
-</Button>
-
+        <Button
+          type="primary"
+          htmlType="submit"
+          block
+          className="submit-btn"
+          aria-label="Submit expense form"
+          style={{
+            backgroundColor: '#1a1f71',  // Darker navy base color
+            borderColor: '#1a1f71',
+            color: '#ffffff',
+            transition: 'background-color 0.3s ease'  // Smooth transition for color
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = '#3c4dbd';  // Lighter shade on hover
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = '#1a1f71';  // Reset to original color
+          }}
+        >
+          Submit
+        </Button>
       </Form.Item>
     </Form>
   );
