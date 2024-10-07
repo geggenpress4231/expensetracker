@@ -1,5 +1,7 @@
 # Expense Tracker
 
+A demo of the app can be viewed here: [Expense Tracker Demo](https://drive.google.com/file/d/1W5GBrsKdcS-Tnjqwl3-fAw3aSsKklVHl/view?usp=sharing)
+
 ## Prerequisites
 
 Before running this project, ensure you have the following installed:
