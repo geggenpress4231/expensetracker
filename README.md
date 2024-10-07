@@ -18,14 +18,14 @@ Before running this project, ensure you have the following installed:
    git clone https://github.com/geggenpress4231/expensetracker.git
    cd frontend
    ```
-## Install Dependencies
+### Install Dependencies
 
 Install the project dependencies by running:
 
 ```bash
 npm install
 ```
-## Setup JSON Server
+### Setup JSON Server
 
 This project uses **JSON Server** to mock a RESTful API. Follow these steps to set up JSON Server:
 
