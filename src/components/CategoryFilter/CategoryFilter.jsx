@@ -1,5 +1,6 @@
 import React from 'react';
 import { Select } from 'antd';
+import './CategoryFilter.css';  // Import the CSS file
 
 const { Option } = Select;
 
@@ -9,7 +10,7 @@ export default function CategoryFilter({ categories, onCategoryChange, selectedC
       mode={allowMultiple ? "multiple" : undefined}
       allowClear
       placeholder="Select Category"
-      style={{ width: '100%' }}
+      className="category-select"
       onChange={onCategoryChange}
       value={selectedCategories}
     >

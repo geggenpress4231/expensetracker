@@ -1,0 +1,40 @@
+/* Container for the category filter */
+.category-select {
+  width: 100%;
+  white-space: nowrap;
+}
+
+/* The selected tags in the Select dropdown */
+.ant-select-selector {
+  max-height: 40px;   /* Limit the height of the selector */
+  overflow-x: auto;   /* Enable horizontal scrolling */
+  display: flex;
+  flex-wrap: nowrap;  /* Prevent line breaks */
+  align-items: center;
+}
+
+/* Hide the scrollbar, show it only when scrolling */
+.ant-select-selector::-webkit-scrollbar {
+  height: 6px; /* Adjust the height of the scrollbar */
+}
+
+.ant-select-selector::-webkit-scrollbar-thumb {
+  background-color: #d1d1d1;  /* Color of the scrollbar */
+  border-radius: 4px;         /* Rounded edges */
+}
+
+.ant-select-selector::-webkit-scrollbar-track {
+  background-color: #f4f4f4;
+}
+
+/* Scrollbar styling for non-webkit browsers (optional) */
+.ant-select-selector {
+  scrollbar-width: thin;           /* For Firefox */
+  scrollbar-color: #d1d1d1 #f4f4f4;
+}
+
+/* Dropdown styles to limit height */
+.ant-select-dropdown {
+  max-height: 150px;   /* Limit the height of the dropdown */
+  overflow-y: auto;    /* Add vertical scroll if needed */
+}

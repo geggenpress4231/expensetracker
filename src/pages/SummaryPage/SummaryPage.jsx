@@ -5,7 +5,7 @@ import PieChart from '../../components/PieChart';
 import { fetchExpenses } from '../../actions/expenseActions';
 import HamburgerMenu from '../../components/HamburgerMenu/HamburgerMenu';
 import DateFilter from '../../components/DateFilter'; 
-import CategoryFilter from '../../components/CategoryFilter';
+import CategoryFilter from '../../components/CategoryFilter/CategoryFilter';
 import moment from 'moment';
 import './SummaryPage.css';
 

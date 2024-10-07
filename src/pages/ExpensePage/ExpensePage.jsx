@@ -6,7 +6,7 @@ import HamburgerMenu from "../../components/HamburgerMenu/HamburgerMenu";
 import ExpenseSearch from "../../components/ExpenseSearch"; 
 import DateFilter from "../../components/DateFilter";  
 import { showModal } from "../../actions/modalActions";  
-import CategoryFilter from "../../components/CategoryFilter";
+import CategoryFilter from "../../components/CategoryFilter/CategoryFilter";
 import ExpenseFormModal from "../../components/ExpenseFormModal"; // Import the ExpenseFormModal
 import './ExpensePage.css';
 
