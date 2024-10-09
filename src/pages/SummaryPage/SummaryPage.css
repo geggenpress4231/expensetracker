@@ -195,8 +195,9 @@ h1 {
     overflow-y: auto;
   }
 
+  /* Adjust filters and total expenses to be on individual lines */
   .filter-expense-container {
-    flex-wrap: wrap; /* Allow wrapping */
+    flex-direction: column; /* Stack items vertically */
     justify-content: space-between;
     padding: 0 1rem;
     gap: 10px;
@@ -204,15 +205,14 @@ h1 {
   }
 
   .filter-item {
-    flex: 1;
-    min-width: 100px;
-    margin-bottom: 0;
+    width: 100%; /* Ensure each filter takes full width */
+    margin-bottom: 10px; /* Add space between filters */
   }
 
   .total-expenses {
     font-size: 1rem;
     text-align: left;
-    width: 100%;
+    width: 100%; /* Take the full width */
     margin-top: 10px;
   }
 
@@ -244,3 +244,4 @@ h1 {
     z-index: 10;
   }
 }
+
