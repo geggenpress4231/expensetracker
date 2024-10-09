@@ -5,8 +5,8 @@
 
 /* Summary Page Container */
 .summary-page-container {
-  max-width: 100%; /* Full width for responsiveness */
-  margin: 5vh auto; 
+  max-width: 100%;
+  margin: 5vh auto;
   padding: 2vh 4vw;
   background-color: #fff;
   border-radius: 8px;
@@ -28,6 +28,7 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   margin-bottom: 2vh;
+  flex-wrap: wrap; /* Ensure wrapping for smaller screens */
 }
 
 /* Styles for filter items (Date and Category) */
@@ -45,10 +46,12 @@
 .total-expenses {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #2C3E50; 
+  color: #2C3E50;
   text-align: left;
   white-space: nowrap;
   margin-left: 0;
+  width: 100%; /* Ensure it takes full width */
+  margin-top: 10px; /* Add margin to push it below filters */
 }
 
 /* Charts Container */
@@ -83,12 +86,12 @@
 
 /* Styling for the Select Category */
 .filter-item .ant-select {
-  width: 80%; 
+  width: 80%;
   max-width: 300px;
 }
 
 .filter-item .ant-select-selector {
-  height: 40px; 
+  height: 40px;
   font-size: 14px;
 }
 
@@ -96,7 +99,7 @@
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #2C3E50; 
+  color: #2C3E50;
   text-align: center;
   margin-bottom: 20px;
   font-family: 'Lato', sans-serif;
@@ -105,8 +108,8 @@ h1 {
 
 /* Responsive Styles */
 
-/* Medium to Small Tablets */
-@media (max-width: 992px) and (min-width: 769px) {
+/* Medium to Small Tablets (Max-width: 992px) */
+@media (max-width: 992px) {
   .summary-page-container {
     padding: 2vh 3vw;
     height: auto;
@@ -114,10 +117,22 @@ h1 {
   }
 
   .filter-expense-container {
-    flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
     justify-content: space-between;
-    gap: 20px;
+    gap: 15px;
     padding: 1.5vh 2vw;
+  }
+
+  .filter-item {
+    flex: 1;
+    min-width: 150px; 
+  }
+
+  .total-expenses {
+    text-align: left;
+    width: 100%;
+    margin-top: 10px; /* Move below the filters */
   }
 
   .charts-container {
@@ -131,16 +146,10 @@ h1 {
     height: auto;
     min-height: 300px;
   }
-
-  .total-expenses {
-    text-align: center;
-    margin: 0;
-    font-size: 1.4rem;
-  }
 }
 
-/* Small Tablets */
-@media (max-width: 768px) and (min-width: 481px) {
+/* Small Tablets (Max-width: 768px) */
+@media (max-width: 768px) {
   .summary-page-container {
     width: 100vw;
     margin: 0 auto;
@@ -148,20 +157,21 @@ h1 {
   }
 
   .filter-expense-container {
-    flex-direction: column;
-    padding: 1vh 2vw;
+    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 15px;
+    padding: 1vh 2vw;
   }
 
   .filter-item {
-    width: 100%;
-    margin-bottom: 1.2rem;
+    flex: 1;
+    min-width: 120px;
   }
 
   .total-expenses {
-    text-align: center;
-    margin-bottom: 15px;
-    font-size: 1.3rem;
+    text-align: left;
+    width: 100%;
+    margin-top: 10px;
   }
 
   .charts-container {
@@ -176,7 +186,7 @@ h1 {
   }
 }
 
-/* Small Devices (Mobile) */
+/* Small Devices (Max-width: 480px) */
 @media (max-width: 480px) {
   .summary-page-container {
     width: 100vw;
@@ -186,22 +196,24 @@ h1 {
   }
 
   .filter-expense-container {
-    flex-direction: column;
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: space-between;
     padding: 0 1rem;
     gap: 10px;
     width: 100%;
   }
 
   .filter-item {
-    width: 100%;
-    margin-bottom: 1rem;
+    flex: 1;
+    min-width: 100px;
+    margin-bottom: 0;
   }
 
   .total-expenses {
     font-size: 1rem;
-    text-align: center;
-    margin-bottom: 1rem;
+    text-align: left;
     width: 100%;
+    margin-top: 10px;
   }
 
   .charts-container {
