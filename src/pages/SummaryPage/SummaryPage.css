@@ -1,13 +1,19 @@
+/* Global box-sizing */
+* {
+  box-sizing: border-box;
+}
+
 /* Summary Page Container */
 .summary-page-container {
-  max-width: 1250px;
+  max-width: 100%; /* Full width for responsiveness */
   margin: 5vh auto; 
   padding: 2vh 4vw;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;  
-  max-height: 100vh; 
+  overflow-y: auto;
+  height: auto;
+  max-height: 100vh;
 }
 
 /* Filters and Total Expenses Container */
@@ -56,8 +62,8 @@
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  flex-wrap: wrap; 
-  overflow-y: auto;  
+  flex-wrap: wrap;
+  overflow-y: auto;
 }
 
 /* Bar and Pie Chart Containers */
@@ -67,7 +73,7 @@
   align-items: center;
   justify-content: center;
   height: 400px;
-  max-height: 100%;  
+  max-height: 100%;
 }
 
 .pie-chart-container {
@@ -78,7 +84,7 @@
 /* Styling for the Select Category */
 .filter-item .ant-select {
   width: 80%; 
-  max-width: 300px; 
+  max-width: 300px;
 }
 
 .filter-item .ant-select-selector {
@@ -93,10 +99,13 @@ h1 {
   color: #2C3E50; 
   text-align: center;
   margin-bottom: 20px;
-  font-family: 'Lato', sans-serif; 
+  font-family: 'Lato', sans-serif;
   letter-spacing: 0.5px;
 }
 
+/* Responsive Styles */
+
+/* Medium to Small Tablets */
 @media (max-width: 992px) and (min-width: 769px) {
   .summary-page-container {
     padding: 2vh 3vw;
@@ -118,7 +127,7 @@ h1 {
   }
 
   .bar-chart-container, .pie-chart-container {
-    width: 100%;
+    flex-basis: 100%;
     height: auto;
     min-height: 300px;
   }
@@ -130,6 +139,7 @@ h1 {
   }
 }
 
+/* Small Tablets */
 @media (max-width: 768px) and (min-width: 481px) {
   .summary-page-container {
     width: 100vw;
@@ -160,83 +170,16 @@ h1 {
   }
 
   .bar-chart-container, .pie-chart-container {
-    width: 100%;
+    flex-basis: 100%;
     height: 300px;
     margin: 0 auto;
   }
 }
 
-@media (max-width: 992px) and (min-width: 769px) {
-  .summary-page-container {
-    padding: 2vh 3vw;
-    height: auto;
-    overflow-y: auto;
-  }
-
-  .filter-expense-container {
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 1.5vh 2vw;
-  }
-
-  .charts-container {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .bar-chart-container, .pie-chart-container {
-    width: 100%;
-    height: auto;
-    min-height: 300px;
-  }
-
-  .total-expenses {
-    text-align: center;
-    margin: 0;
-    font-size: 1.4rem;
-  }
-}
-
-@media (max-width: 768px) and (min-width: 481px) {
-  .summary-page-container {
-    width: 100vw;
-    margin: 0 auto;
-    padding: 2vh 2vw;
-  }
-
-  .filter-expense-container {
-    flex-direction: column;
-    padding: 1vh 2vw;
-    gap: 15px;
-  }
-
-  .filter-item {
-    width: 100%;
-    margin-bottom: 1.2rem;
-  }
-
-  .total-expenses {
-    text-align: center;
-    margin-bottom: 15px;
-    font-size: 1.3rem;
-  }
-
-  .charts-container {
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .bar-chart-container, .pie-chart-container {
-    width: 100%;
-    height: 300px;
-    margin: 0 auto;
-  }
-}
-
+/* Small Devices (Mobile) */
 @media (max-width: 480px) {
   .summary-page-container {
+    width: 100vw;
     padding: 0;
     margin: 0 auto;
     overflow-y: auto;
@@ -244,8 +187,9 @@ h1 {
 
   .filter-expense-container {
     flex-direction: column;
+    padding: 0 1rem;
+    gap: 10px;
     width: 100%;
-    padding: 0;
   }
 
   .filter-item {
@@ -261,19 +205,30 @@ h1 {
   }
 
   .charts-container {
+    flex-direction: column;
     gap: 10px;
     width: 100%;
-    flex-direction: column;
+    padding: 1rem;
+    overflow-x: auto;
   }
 
   .bar-chart-container, .pie-chart-container {
+    flex-basis: 100%;
+    min-width: 300px;
     height: 250px;
-    width: 100%;
+    overflow-x: auto;
   }
 
   h1 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     text-align: center;
-    margin: 0 auto;
+    margin: 1rem auto;
+  }
+
+  .hamburger-menu {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 10;
   }
 }
