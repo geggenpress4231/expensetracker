@@ -1,16 +1,16 @@
 /* Main page layout */
 .expense-page {
-    max-width: 100%; /* Ensure full width similar to summary-page-container */
-    margin: 5vh auto; /* Keep consistent with summary-page-container */
-    padding: 2vh 4vw; /* Match the padding used in summary-page-container */
+    max-width: 100%;
+    margin: 5vh auto;
+    padding: 2vh 4vw;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    height: auto; /* Adjust to auto for better handling of content */
-    max-height: 100vh; /* Consistent with summary-page-container */
+    height: auto;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: auto; /* Ensure scrolling if content overflows */
+    overflow: auto;
 }
 
 /* Filters and Add Expense Button */
@@ -20,7 +20,22 @@
     align-items: center;
     gap: 1vw;
     margin-bottom: 2vh;
-    width: 100%; /* Ensure full width for the filters container */
+    width: 100%;
+}
+
+/* Adjustments for spacing using nth-child */
+.filters-container .filter-item:nth-child(1) {
+    flex-grow: 2;
+}
+
+.filters-container .filter-item:nth-child(2) {
+    margin-right: 30vw; /* Adjust the spacing after the second filter */
+}
+
+.filters-container .filter-item:nth-child(3),
+.filters-container .filter-item:nth-child(4) {
+    align-self: flex-end;
+    flex-grow: 1;
 }
 
 /* Adjustments for header text */
@@ -36,14 +51,14 @@ h1 {
     border-bottom: 2px solid #dcdcdc;
     padding-bottom: 10px;
     margin-top: 10px;
-    width: 100%; /* Ensure full width for the heading */
+    width: 100%;
 }
 
 /* Adjustments for table and list container */
 .expense-list-container {
     max-height: calc(100vh - 250px);
     overflow-y: auto;
-    width: 100%; /* Ensure the table takes the full width */
+    width: 100%;
 }
 
 /* Add Expense Button */
@@ -79,7 +94,22 @@ h1 {
     }
 
     .add-expense-btn {
-        width: 32%; /* Ensure Add Expense button takes full width */
+        width: 32%;
+    }
+
+    /* Restore nth-child styles for smaller screens */
+    .filters-container .filter-item:nth-child(1) {
+        flex-grow: 1;
+    }
+
+    .filters-container .filter-item:nth-child(2) {
+        margin-right: 15vw;
+    }
+
+    .filters-container .filter-item:nth-child(3),
+    .filters-container .filter-item:nth-child(4) {
+        flex-grow: 1;
+        align-self: center;
     }
 }
 
