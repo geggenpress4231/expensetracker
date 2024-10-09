@@ -103,7 +103,7 @@ h1 {
     }
 
     .filters-container .filter-item:nth-child(2) {
-        margin-right: 1vw;
+        margin-right: 2vw;
     }
 
     .filters-container .filter-item:nth-child(3),
@@ -118,19 +118,61 @@ h1 {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        
-        gap: 5px;
+        gap: 1rem;
     }
 
     .filter-item {
-        flex: 1;
-        min-width: 200px;
-        max-width: 45%;
+        width: calc(50% - 1rem); /* Ensure 2 items per row with proper spacing */
+        margin-bottom: 1rem;
+    }
+
+    .add-expense-btn {
+        width: 32%;
+    }
+
+    .filters-container .filter-item:nth-child(1) {
+        flex-grow: 2;
+    }
+
+    .filters-container .filter-item:nth-child(2) {
+        margin-right: 2vw;
+    }
+
+    .filters-container .filter-item:nth-child(3),
+    .filters-container .filter-item:nth-child(4) {
+        flex-grow: 1;
+        align-self: center;
     }
 
     .add-expense-btn-container {
         width: 100%;
         text-align: center;
         margin-top: 10px;
+    }
+}
+@media (max-width: 600px) {
+    .filters-container {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        gap: 1rem;
+        justify-content: space-between;
+    }
+
+    .filter-item {
+        width: 100%; /* Full width for each filter item */
+        margin-bottom: 1rem;
+    }
+
+    .add-expense-btn {
+        width: 100%; /* Full width button */
+    }
+
+    /* Restore nth-child styles for smaller screens */
+    .filters-container .filter-item:nth-child(1),
+    .filters-container .filter-item:nth-child(2),
+    .filters-container .filter-item:nth-child(3),
+    .filters-container .filter-item:nth-child(4) {
+        flex-grow: 1;
+        align-self: stretch;
     }
 }
