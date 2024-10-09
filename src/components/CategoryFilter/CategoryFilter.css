@@ -1,40 +1,41 @@
-/* Container for the category filter */
 .category-select {
   width: 100%;
-  white-space: nowrap;
 }
 
-/* The selected tags in the Select dropdown */
 .ant-select-selector {
-  max-height: 40px;   /* Limit the height of the selector */
-  overflow-x: auto;   /* Enable horizontal scrolling */
+  max-height: 40px;
+  overflow-x: auto;
   display: flex;
-  flex-wrap: nowrap;  /* Prevent line breaks */
+  flex-wrap: wrap;
   align-items: center;
+  width: 100%;
 }
 
-/* Hide the scrollbar, show it only when scrolling */
 .ant-select-selector::-webkit-scrollbar {
-  height: 6px; /* Adjust the height of the scrollbar */
+  height: 6px;
 }
 
 .ant-select-selector::-webkit-scrollbar-thumb {
-  background-color: #d1d1d1;  /* Color of the scrollbar */
-  border-radius: 4px;         /* Rounded edges */
+  background-color: #d1d1d1;
+  border-radius: 4px;
 }
 
 .ant-select-selector::-webkit-scrollbar-track {
   background-color: #f4f4f4;
 }
 
-/* Scrollbar styling for non-webkit browsers (optional) */
 .ant-select-selector {
-  scrollbar-width: thin;           /* For Firefox */
+  scrollbar-width: thin;
   scrollbar-color: #d1d1d1 #f4f4f4;
 }
 
-/* Dropdown styles to limit height */
 .ant-select-dropdown {
-  max-height: 150px;   /* Limit the height of the dropdown */
-  overflow-y: auto;    /* Add vertical scroll if needed */
+  max-height: 150px;
+  overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ant-select-dropdown-menu {
+  width: 100%;
 }

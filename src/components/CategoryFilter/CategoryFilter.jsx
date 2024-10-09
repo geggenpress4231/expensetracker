@@ -13,7 +13,7 @@ export default function CategoryFilter({ categories, onCategoryChange, selectedC
       className="category-select"
       onChange={onCategoryChange}
       value={selectedCategories}
-      style={{ width: '100%' }}
+      
     >
       {categories.map(category => (
         <Option key={category} value={category}>
