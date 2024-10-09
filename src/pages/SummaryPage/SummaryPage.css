@@ -197,7 +197,7 @@ h1 {
 
   /* Adjust filters and total expenses to be on individual lines */
   .filter-expense-container {
-    flex-direction: column; /* Stack items vertically */
+    flex-direction: column; 
     justify-content: space-between;
     padding: 0 1rem;
     gap: 10px;
@@ -205,7 +205,7 @@ h1 {
   }
 
   .filter-item {
-    width: 100%; /* Ensure each filter takes full width */
+    width: 100%; 
     margin-bottom: 10px; /* Add space between filters */
   }
 
