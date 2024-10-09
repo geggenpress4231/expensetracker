@@ -167,6 +167,13 @@
       "amount": 21.34,
       "date": "2024-10-05",
       "category": "Food"
+    },
+    {
+      "id": "1728499108847",
+      "description": "torrance barren ",
+      "amount": 100,
+      "date": "2024-10-09",
+      "category": "Other"
     }
   ]
 }
