@@ -144,20 +144,22 @@ h1 {
 
 @media (max-width: 768px) {
     .filters-container {
-      flex-direction: column; 
-      align-items: stretch; 
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /* Ensure there's space between the filters */
+        gap: 1rem;  /* Add some spacing between items */
     }
-  
-    .filters-container .filter-item:nth-child(3),
-    .filters-container .filter-item:nth-child(4) {
-      width: 100%; 
-      align-self: center;
+
+    .filter-item {
+        width: calc(50% - 0.5rem);  /* Adjust width to take half the space */
+        margin-bottom: 1rem;  /* Ensure there is space below items */
     }
-  
-    .filters-container .filter-item:nth-child(4) {
-      margin-top: 1vh; 
+
+    .add-expense-btn {
+        width: 100%;  /* Ensure Add Expense button takes full width */
     }
 }
+
 
 @media (max-width: 992px) and (min-width: 768px) {
     /* Adjust padding for tablets */
