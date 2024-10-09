@@ -46,7 +46,7 @@ export default function DateFilter({ onDateChange }) {
           onChange={handleDateChange}
           format={dateFormat}  // Dynamically set display format based on screen size
           placeholder={['From', 'To']}
-          style={{ width: '100%', height: '2vh', padding: '8px 12px', border: 'none', backgroundColor: 'transparent' }}
+          style={{ width: '100%', height: '2vh', padding: '2px 12px', border: 'none', backgroundColor: 'transparent' }}
           bordered={false}
         />
       </div>
