@@ -1,25 +1,16 @@
-/* Global styles */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f6f9;
-    margin-top: 2vh;
-    padding: 0;
-    height: 100vh;
-    overflow: auto;  /* Allow scrolling if necessary */
-}
-
 /* Main page layout */
 .expense-page {
-    max-width: 1250px;
-    margin: 5vh auto;
-    padding: 20px;
+    max-width: 100%; /* Ensure full width similar to summary-page-container */
+    margin: 5vh auto; /* Keep consistent with summary-page-container */
+    padding: 2vh 4vw; /* Match the padding used in summary-page-container */
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    height: 90vh;
+    height: auto; /* Adjust to auto for better handling of content */
+    max-height: 100vh; /* Consistent with summary-page-container */
     display: flex;
     flex-direction: column;
-    overflow: auto;  /* Allow vertical scrolling */
+    overflow: auto; /* Ensure scrolling if content overflows */
 }
 
 /* Filters and Add Expense Button */
@@ -29,171 +20,87 @@ body {
     align-items: center;
     gap: 1vw;
     margin-bottom: 2vh;
-}
-
-
-.filter-item {
-    flex-grow: 1;
-    height: 45px; 
-    display: flex;
-    align-items: center; 
-}
-
-
-.filters-container .filter-item:nth-child(1) {
-    flex-grow: 2; 
-}
-
-/* Margin adjustment for better spacing after nth-child(2) */
-.filters-container .filter-item:nth-child(2) {
-    margin-right: 30vw; 
-}
-
-/* Align self for the last two filter items */
-.filters-container .filter-item:nth-child(3),
-.filters-container .filter-item:nth-child(4) {
-    align-self: flex-end;
-    flex-grow: 1; 
-}
-
-
-/* Specific styles for search input to ensure it fills the height */
-.expense-search {
-    width: 100%;
-    height: 100%; 
-    border-radius: 4px;
-    padding: 8px;
-    font-size: 14px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-
-.expense-search:focus {
-    border-color: #2C3E50;
-    outline: none;
-    box-shadow: 0 0 5px rgba(44, 62, 80, 0.5);
-}
-
-/* Table styling */
-.expense-list th {
-    background-color: #2C3E50;
-    color: white;
-    padding: 12px;
-    text-align: left;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.expense-list td {
-    padding: 12px;
-    border-bottom: 1px solid #e0e0e0;
-    text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.expense-list-container {
-    max-height: calc(100vh - 250px);
-    overflow-y: auto;
-}
-
-/* Add Expense Button */
-.expense-page .add-expense-btn {
-    padding: 8px 12px;
-    font-size: 14px;
-    width: auto;
-    min-width: 120px;
-    border-radius: 4px;
-    background-color: #2C3E50; 
-}
-
-.expense-page .add-expense-btn:hover {
-    background-color: #1A252F; /* Darker navy */
-}
-
-.expense-page .add-expense-btn:active {
-    background-color: #0D1820;
+    width: 100%; /* Ensure full width for the filters container */
 }
 
 /* Adjustments for header text */
 h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #2c3e50; 
+    color: #2c3e50;
     text-align: center;
     margin-bottom: 25px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-family: 'Lato', sans-serif; 
-    border-bottom: 2px solid #dcdcdc; 
-    padding-bottom: 10px; 
-    margin-top: 10px; 
-}
-
-/* Total Expenses Styling */
-.summary-page-total-expenses h2 {
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: #555555; 
-    text-align: left;
     font-family: 'Lato', sans-serif;
+    border-bottom: 2px solid #dcdcdc;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    width: 100%; /* Ensure full width for the heading */
 }
 
+/* Adjustments for table and list container */
+.expense-list-container {
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+    width: 100%; /* Ensure the table takes the full width */
+}
+
+/* Add Expense Button */
+.add-expense-btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    width: auto;
+    min-width: 120px;
+    border-radius: 4px;
+    background-color: #2C3E50;
+}
+
+.add-expense-btn:hover {
+    background-color: #1A252F;
+}
+
+.add-expense-btn:active {
+    background-color: #0D1820;
+}
+
+/* Responsive styles for smaller screens */
 @media (max-width: 768px) {
     .filters-container {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between; /* Ensure there's space between the filters */
-        gap: 1rem;  /* Add some spacing between items */
+        justify-content: space-between;
+        gap: 1rem;
     }
 
     .filter-item {
-        width: calc(50% - 0.5rem);  /* Adjust width to take half the space */
-        margin-bottom: 1rem;  /* Ensure there is space below items */
+        width: calc(50% - 0.5rem);
+        margin-bottom: 1rem;
     }
 
     .add-expense-btn {
-        width: 100%;  /* Ensure Add Expense button takes full width */
+        width: 32%; /* Ensure Add Expense button takes full width */
     }
 }
 
-
 @media (max-width: 992px) and (min-width: 768px) {
-    /* Adjust padding for tablets */
-    .summary-page-container {
-      padding: 2vh 3vw;
-    }
-  
-   
     .filters-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
     }
-  
-  
+
     .filter-item {
-      flex: 1;
-      min-width: 200px;
-      max-width: 45%; 
+        flex: 1;
+        min-width: 200px;
+        max-width: 45%;
     }
-  
-    /* Adjust category and search width for side-by-side layout */
-    .filter-item .ant-select, 
-    .filter-item .ant-picker,
-    .filter-item .search-input {  
-      width: 100%;
-    }
-  
-    /* Place Add Expense button below */
+
     .add-expense-btn-container {
-      width: 100%;
-      text-align: center;
-      margin-top: 10px;  
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
     }
 }
