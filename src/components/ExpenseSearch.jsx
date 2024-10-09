@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { Input } from 'antd';
-import { useDispatch } from 'react-redux';
-import { updateSearchParams } from '../actions/searchActions';
 import debounce from 'lodash.debounce';
 
 const { Search } = Input;

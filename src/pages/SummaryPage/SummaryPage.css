@@ -86,8 +86,8 @@
 
 /* Styling for the Select Category */
 .filter-item .ant-select {
-  width: 80%;
-  max-width: 300px;
+  width: 100%;
+  
 }
 
 .filter-item .ant-select-selector {
