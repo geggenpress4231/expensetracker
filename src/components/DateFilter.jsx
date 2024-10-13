@@ -11,19 +11,13 @@ export default function DateFilter({ onDateChange }) {
 
   // Handle date changes
   const handleDateChange = (dates, dateStrings) => {
-    if (dates) {
-      const formattedDates = dates.map(date => date ? date.format('YYYY-MM-DD') : null);
-      setSelectedDates(dates); // Update controlled state
-      onDateChange(formattedDates);
+    if (dates && dates.length === 2) {
+      onDateChange(dateStrings);  // Send formatted date strings to the parent component
+      setSelectedDates(dates);    // Keep the selected dates as moment objects for the RangePicker
     } else {
-      setSelectedDates([null, null]);
+      setSelectedDates([null, null]); // Clear the selected dates if nothing is selected
       onDateChange([null, null]);
     }
-  };
-
-  // Clear the selected dates when the user clicks on the RangePicker
-  const handleFocus = () => {
-    setSelectedDates([null, null]); // Clear the state on focus to prevent preselected dates
   };
 
   // Adjust date format based on screen size
@@ -47,8 +41,7 @@ export default function DateFilter({ onDateChange }) {
       <div style={{ display: 'flex', alignItems: 'center', padding: '10px', border: '1px solid #d9d9d9', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
         <CalendarOutlined style={{ marginRight: '10px', fontSize: '18px', color: '#1a1f71' }} />
         <RangePicker
-          value={selectedDates} // Controlled value (always start with a clear state)
-          onFocus={handleFocus}  // Clear dates when the picker is clicked
+          value={selectedDates} // Controlled value
           onChange={handleDateChange}
           format={dateFormat} // Dynamically set display format based on screen size
           placeholder={['From', 'To']}
