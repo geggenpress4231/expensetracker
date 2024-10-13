@@ -6,35 +6,39 @@ import moment from 'moment';
 const { RangePicker } = DatePicker;
 
 export default function DateFilter({ onDateChange }) {
-  const [dateFormat, setDateFormat] = useState('YYYY-MM-DD'); // Default display format
-  
+  const [dateFormat, setDateFormat] = useState('YYYY-MM-DD');
+  const [selectedDates, setSelectedDates] = useState([null, null]);
+
+  // Handle date changes
   const handleDateChange = (dates, dateStrings) => {
-    // Internally handle dates in 'YYYY-MM-DD' format for consistency
     if (dates) {
       const formattedDates = dates.map(date => date ? date.format('YYYY-MM-DD') : null);
-      onDateChange(formattedDates); // Pass consistently formatted dates
+      setSelectedDates(dates); // Update controlled state
+      onDateChange(formattedDates);
     } else {
-      onDateChange([null, null]);  // Pass null when date range is cleared
+      setSelectedDates([null, null]);
+      onDateChange([null, null]);
     }
   };
 
-  // Check screen size and adjust the date display format accordingly
+  // Clear the selected dates when the user clicks on the RangePicker
+  const handleFocus = () => {
+    setSelectedDates([null, null]); // Clear the state on focus to prevent preselected dates
+  };
+
+  // Adjust date format based on screen size
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
-        setDateFormat('DD-MM-YYYY'); // Use day-month-year display format on smaller screens
+        setDateFormat('DD-MM-YYYY');
       } else {
-        setDateFormat('YYYY-MM-DD'); // Use year-month-day display format on larger screens
+        setDateFormat('YYYY-MM-DD');
       }
     };
 
-    // Add event listener to detect window resize
     window.addEventListener('resize', handleResize);
+    handleResize(); // Run once to set initial state
 
-    // Run once to set initial state
-    handleResize();
-
-    // Cleanup the event listener on unmount
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -43,11 +47,14 @@ export default function DateFilter({ onDateChange }) {
       <div style={{ display: 'flex', alignItems: 'center', padding: '10px', border: '1px solid #d9d9d9', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
         <CalendarOutlined style={{ marginRight: '10px', fontSize: '18px', color: '#1a1f71' }} />
         <RangePicker
+          value={selectedDates} // Controlled value (always start with a clear state)
+          onFocus={handleFocus}  // Clear dates when the picker is clicked
           onChange={handleDateChange}
-          format={dateFormat}  // Dynamically set display format based on screen size
+          format={dateFormat} // Dynamically set display format based on screen size
           placeholder={['From', 'To']}
           style={{ width: '100%', height: '2vh', padding: '2px 12px', border: 'none', backgroundColor: 'transparent' }}
           bordered={false}
+          allowClear={true} // Allow clearing of dates with a "clear" button
         />
       </div>
     </Space>

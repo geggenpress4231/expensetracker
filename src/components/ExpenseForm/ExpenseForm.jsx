@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { addExpense, updateExpense } from '../../actions/expenseActions';
-import { AutoComplete, Input, Button, Select, DatePicker, Form } from 'antd';
+import { AutoComplete, Input, Button, Select, DatePicker, Form, message } from 'antd';  // Import message
 import moment from 'moment';
 
 export default function ExpenseForm({ onSubmit, expense }) {
@@ -46,11 +46,13 @@ export default function ExpenseForm({ onSubmit, expense }) {
 
     if (expense) {
       dispatch(updateExpense(newExpense));
+      message.success('Expense updated successfully!');  // Show success toast for update
     } else {
       dispatch(addExpense(newExpense));
+      message.success('Expense added successfully!');  // Show success toast for adding expense
     }
 
-    onSubmit();
+    onSubmit();  // Close the modal or any other action
   };
 
   const handleSearch = (searchText) => {
