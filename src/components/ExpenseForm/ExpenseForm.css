@@ -1,5 +1,5 @@
 .expense-form {
-  max-width: 90%; /* Allow the form to take up to 90% of the viewport width */
+  max-width: 90%; 
   margin: 0 auto;
   padding: 20px;
   background: #fff;
@@ -13,17 +13,35 @@
 
 .expense-form input, 
 .expense-form .ant-select-selector, 
-.expense-form .ant-picker, 
-.submit-btn {
+.expense-form .ant-picker {
   height: 45px;
   font-size: 16px;
   padding: 10px;
   border-radius: 4px;
-  width: 100%; /* Ensure all inputs are 100% wide of their container */
-  box-sizing: border-box; /* Prevent padding from affecting the element's width */
+  width: 100%; 
+  box-sizing: border-box; 
 }
 
+/* Submit button styling */
+.submit-btn {
+  height: 45px;
+  font-size: 16px;
+  border-radius: 4px;
+  width: 100%;
+  background-color: #1a1f71; 
+  color: white; 
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
 
+.submit-btn:hover {
+  background-color: #3c4dbd; 
+}
+
+.submit-btn:active {
+  background-color: #14205b; 
+}
 
 .expense-form .ant-form-item-label > label {
   font-size: 14px;
@@ -46,12 +64,12 @@
 /* Media Queries for responsiveness */
 @media (min-width: 768px) {
   .expense-form {
-    max-width: 600px; /* Set a maximum width for larger screens */
+    max-width: 600px; 
   }
 }
 
 @media (max-width: 480px) {
   .expense-form {
-    padding: 15px; /* Adjust padding for smaller screens */
+    padding: 15px; 
   }
 }
