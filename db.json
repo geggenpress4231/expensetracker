@@ -150,7 +150,7 @@
     {
       "id": "1728147201001",
       "description": "osmows",
-      "amount": 39.48,
+      "amount": 39.49,
       "date": "2024-10-09",
       "category": "Food"
     },
@@ -171,12 +171,12 @@
     {
       "id": "1728499108847",
       "description": "torrance barren ",
-      "amount": 100,
+      "amount": 100.5,
       "date": "2024-10-09",
       "category": "Other"
     },
     {
-      "id": 1729008503921,
+      "id": "1729008503921",
       "description": "ride",
       "amount": 24,
       "date": "2024-10-15",

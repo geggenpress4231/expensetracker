@@ -66,13 +66,11 @@ export default function ExpenseList({ onEditExpense, searchParams, selectedDateR
     return [...filteredExpenses].sort((a, b) => new Date(b.date) - new Date(a.date));
   }, [filteredExpenses]);
 
+  // Case 1: No expenses at all, show welcome message
   if (expenses.length === 0) {
-    // Case 1: No expenses at all, welcome message
     return (
       <section className="expense-list-container">
         <div className="welcome-message-container">
-          {/* You can uncomment the title if needed */}
-          {/* <h2 className="welcome-title">Welcome to the Expense Tracker!</h2> */}
           <p className="welcome-description">
             Start managing your expenses efficiently and effortlessly.
           </p>
@@ -83,8 +81,17 @@ export default function ExpenseList({ onEditExpense, searchParams, selectedDateR
       </section>
     );
   }
-  
-  
+
+  // Case 2: Expenses exist but no filtered results match the filters
+  if (expenses.length > 0 && filteredExpenses.length === 0) {
+    return (
+      <section className="expense-list-container">
+        <p className="no-expenses-message">
+          No expenses match the selected filters. Please adjust your filters and try again.
+        </p>
+      </section>
+    );
+  }
 
   // Case 3: Display filtered or all expenses
   return (
