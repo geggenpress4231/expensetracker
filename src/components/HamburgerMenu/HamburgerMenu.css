@@ -1,25 +1,25 @@
 /* Hamburger Button Style */
 .hamburger-button {
     position: absolute;
-    top: 55px;
-    left: 20px;
+    top: 3.5rem; /* Relative unit */
+    left: 1.25rem; /* Relative unit */
     background-color: #1a1f71; 
     border-radius: 50%;
-    padding: 10px;
-    transition: background-color 0.3s ease, top 0.3s ease, left 0.3s ease; 
+    padding: 0.625rem; /* Relative padding (10px = 0.625rem) */
+    transition: background-color 0.3s ease, top 0.3s ease, left 0.3s ease;
     cursor: pointer;
-    z-index: 1000; 
+    z-index: 1000;
 }
 
 .hamburger-button:hover {
-    background-color: #14205b; 
+    background-color: #14205b;
 }
 
 /* Drawer Header Styling */
 .drawer-header {
     display: flex;
     justify-content: flex-start;
-    padding: 10px;
+    padding: 0.625rem; /* Relative padding */
     background-color: #f4f6f9;
     align-items: center;
 }
@@ -28,7 +28,7 @@
 .close-button {
     background-color: transparent;
     border: none;
-    font-size: 18px;
+    font-size: 1.125rem; /* Relative font size (18px = 1.125rem) */
     color: #1a1f71;
     cursor: pointer;
 }
@@ -49,17 +49,17 @@
     background-color: #f4f6f9;
     border-right: none;
     padding-top: 0;
-    width: 100%; 
+    width: 100%;
 }
 
 /* Menu Items */
 .ant-menu-item {
-    padding: 15px 24px;
-    font-size: 16px;
+    padding: 1rem 1.5rem; /* Relative padding */
+    font-size: 1rem; /* Relative font size (16px = 1rem) */
     display: flex;
     align-items: center;
-    color: #1a1f71; 
-    transition: background-color 0.3s ease, padding 0.3s ease; 
+    color: #1a1f71;
+    transition: background-color 0.3s ease, padding 0.3s ease;
 }
 
 .ant-menu-item:hover {
@@ -68,8 +68,8 @@
 }
 
 .ant-menu-item .anticon {
-    margin-right: 16px;
-    font-size: 20px;
+    margin-right: 1rem;
+    font-size: 1.25rem; /* Relative icon size */
     color: #1a1f71;
 }
 
@@ -92,34 +92,38 @@
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
     .hamburger-button {
-        top: 55px;
-        left: 15px;
-        padding: 8px;
+        top: 3rem; /* Smaller top positioning */
+        left: 1rem; /* Smaller left positioning */
+        padding: 0.5rem; /* Smaller padding */
     }
 
     .ant-menu-item {
-        padding: 12px 20px; 
-        font-size: 14px;
+        padding: 0.75rem 1.25rem; /* Smaller padding */
+        font-size: 0.875rem; /* Smaller font size (14px = 0.875rem) */
     }
 
     .ant-menu-item .anticon {
-        font-size: 18px;
+        font-size: 1.125rem; /* Adjust icon size */
     }
 }
-
+@media (max-width: 530px) {
+    .expense-page-title {
+        font-size: 1.8rem; /* Smaller font size for screens around 500px */
+    }
+}
 @media (max-width: 480px) {
     .hamburger-button {
-        top: 40px;
-        left: 10px;
-        padding: 6px;
+        top: 2.5rem; /* Even smaller top positioning */
+        left: 0.75rem; /* Smaller left positioning */
+        padding: 0.375rem; /* Even smaller padding */
     }
 
     .ant-menu-item {
-        padding: 10px 15px;
-        font-size: 13px;
+        padding: 0.625rem 1rem; /* Even smaller padding */
+        font-size: 0.8125rem; /* Smaller font size (13px = 0.8125rem) */
     }
 
     .ant-menu-item .anticon {
-        font-size: 16px;
+        font-size: 1rem; /* Smaller icon size */
     }
 }
