@@ -2,12 +2,9 @@
 .expense-list-container {
   margin-top: 2vh;
   padding: 0;
-  background-color: #f8f9fa; 
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: transparent; /* Removed background to avoid 'card' feel */
   max-height: 50vh; 
   overflow-y: auto;
-  position: relative;
   width: 100%;
   box-sizing: border-box; 
 }
@@ -19,30 +16,27 @@
   table-layout: auto; 
   font-family: 'Roboto', sans-serif;
   background-color: white;
-  border-radius: 8px;
-  position: relative;
 }
 
 /* Table Headers */
 .expense-list-table th {
-  background-color: #003366; /* Dark blue for a more refined header background */
+  background-color: #003366; /* Dark blue header background */
   color: white;
   text-align: center;
   padding: 12px;
   font-weight: 600;
   font-size: 14px;
-  border-bottom: 2px solid #d1d1d1;
+  border-bottom: 1px solid #e0e0e0; /* Reduced border size */
   white-space: nowrap;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Table Rows */
 .expense-list-table td {
-  padding: 12px; /* Consistent padding for both th and td */
-  border-bottom: 1px solid #d1d1d1;
+  padding: 12px; /* Consistent padding */
+  border-bottom: 1px solid #f0f0f0; /* Lighter row border for softer look */
   font-size: 14px;
   color: #333;
   white-space: nowrap;
@@ -79,7 +73,7 @@
 
 /* Row Hover Effect */
 .expense-list-table tr:hover {
-  background-color: #e6f2ff; /* Light blue on hover for better visibility */
+  background-color: #f7faff; /* Softer hover effect */
   transition: background-color 0.2s ease-in-out;
 }
 
@@ -91,32 +85,84 @@
   margin-top: 20px;
 }
 
+/* Welcome Message Styling */
+.welcome-message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: transparent; /* Removed background */
+  padding: 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  border-bottom: 2px solid #e0e0e0; /* Subtle bottom border to separate */
+}
+
+.welcome-description {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #333; /* Darker color for readability */
+  margin-bottom: 15px;
+}
+
+.instruction-text {
+  font-size: 1rem;
+  color: #5a5a5a;
+  margin-bottom: 15px;
+}
+
+/* Remove card-style button */
+.start-btn {
+  background-color: transparent;
+  padding: 12px 30px;
+  color: #1a1f71;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
   .expense-list-container {
-      max-height: 60vh; 
+    max-height: 60vh; 
   }
   
   .expense-list-table th,
   .expense-list-table td {
-      font-size: 12px;
-      padding: 10px; 
+    font-size: 12px;
+    padding: 10px; 
   }
   
   .expense-list-table th:first-child,
   .expense-list-table td:first-child,
   .expense-list-table th:nth-child(2),
   .expense-list-table td:nth-child(2) {
-      width: 25%; 
+    width: 25%; 
   }
 
   .expense-list-table th:nth-child(3),
   .expense-list-table td:nth-child(3) {
-      width: 35%; 
+    width: 35%; 
   }
   
   .expense-list-table th:last-child,
   .expense-list-table td:last-child {
-      width: 10%; 
+    width: 10%; 
+  }
+
+  .welcome-message-container {
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .welcome-description,
+  .instruction-text {
+    font-size: 0.9rem;
+  }
+
+  .start-btn {
+    padding: 10px 20px;
   }
 }

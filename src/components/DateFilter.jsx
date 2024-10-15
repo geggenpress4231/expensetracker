@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DatePicker, Space } from 'antd';
 import { CalendarOutlined } from '@ant-design/icons';
-import moment from 'moment';
+
 
 const { RangePicker } = DatePicker;
 

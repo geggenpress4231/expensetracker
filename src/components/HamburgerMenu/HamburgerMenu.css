@@ -92,7 +92,7 @@
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
     .hamburger-button {
-        top: 30px;
+        top: 55px;
         left: 15px;
         padding: 8px;
     }
@@ -109,7 +109,7 @@
 
 @media (max-width: 480px) {
     .hamburger-button {
-        top: 20px;
+        top: 40px;
         left: 10px;
         padding: 6px;
     }

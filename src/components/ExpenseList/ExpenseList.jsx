@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteExpense, fetchExpenses } from "../../actions/expenseActions";
 import moment from 'moment';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import { message } from 'antd'; // Importing AntD message for toasts
+import { message } from 'antd'; 
 import './ExpenseList.css';
 
 export default function ExpenseList({ onEditExpense, searchParams, selectedDateRange, selectedCategories }) {
   const dispatch = useDispatch();
   const expenses = useSelector((state) => state.expenses.expenses);
+  const isInitialLoad = useSelector((state) => state.expenses.isInitialLoad);  // Optional: if you are tracking if this is the first load
 
   useEffect(() => {
     dispatch(fetchExpenses())
@@ -65,41 +66,58 @@ export default function ExpenseList({ onEditExpense, searchParams, selectedDateR
     return [...filteredExpenses].sort((a, b) => new Date(b.date) - new Date(a.date));
   }, [filteredExpenses]);
 
+  if (expenses.length === 0) {
+    // Case 1: No expenses at all, welcome message
+    return (
+      <section className="expense-list-container">
+        <div className="welcome-message-container">
+          {/* You can uncomment the title if needed */}
+          {/* <h2 className="welcome-title">Welcome to the Expense Tracker!</h2> */}
+          <p className="welcome-description">
+            Start managing your expenses efficiently and effortlessly.
+          </p>
+          <p className="instruction-text">
+            To get started, click the "Add Expense" button.
+          </p>
+        </div>
+      </section>
+    );
+  }
+  
+  
+
+  // Case 3: Display filtered or all expenses
   return (
     <section className="expense-list-container">
-      {sortedExpenses.length === 0 ? (
-        <p className="no-expenses-message">No expenses found for the selected filters.</p>
-      ) : (
-        <table className="expense-list-table" aria-label="Expense List">
-          <thead>
-            <tr>
-              <th scope="col">Date</th>
-              <th scope="col">Category</th>
-              <th scope="col">Description</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Options</th>
+      <table className="expense-list-table" aria-label="Expense List">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Category</th>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedExpenses.map((expense) => (
+            <tr key={expense.id}>
+              <td>{expense.date}</td>
+              <td>{expense.category}</td>
+              <td>{expense.description}</td>
+              <td>${expense.amount.toFixed(2)}</td>
+              <td className="expense-options">
+                <button aria-label="Edit expense" onClick={() => onEditExpense(expense)}>
+                  <FaEdit className="edit-icon" />
+                </button>
+                <button aria-label="Delete expense" onClick={() => handleDelete(expense.id, expense.description)}>
+                  <FaTrashAlt className="delete-icon" />
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {sortedExpenses.map((expense) => (
-              <tr key={expense.id}>
-                <td>{expense.date}</td>
-                <td>{expense.category}</td>
-                <td>{expense.description}</td>
-                <td>${expense.amount.toFixed(2)}</td>
-                <td className="expense-options">
-                  <button aria-label="Edit expense" onClick={() => onEditExpense(expense)}>
-                    <FaEdit className="edit-icon" />
-                  </button>
-                  <button aria-label="Delete expense" onClick={() => handleDelete(expense.id, expense.description)}>
-                    <FaTrashAlt className="delete-icon" />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+          ))}
+        </tbody>
+      </table>
     </section>
   );
 }
