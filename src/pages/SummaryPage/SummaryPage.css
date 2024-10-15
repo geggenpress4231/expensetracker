@@ -38,6 +38,25 @@
 .filter-item .ant-picker {
   width: 100%;
 }
+.no-expenses-message-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f4f4f9;
+  padding: 50px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.no-expenses-message {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #5a5a5a;
+}
+
 
 /* Total expenses styling */
 .total-expenses {
@@ -65,6 +84,7 @@
   flex-wrap: wrap;
   overflow-y: auto;
 }
+
 
 /* Bar and Pie Chart Containers */
 .bar-chart-container, .pie-chart-container {

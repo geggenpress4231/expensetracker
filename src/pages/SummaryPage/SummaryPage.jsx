@@ -61,11 +61,60 @@ export default function SummaryPage() {
   if (loading) {
     return <p>Loading...</p>;
   }
+  if (expenses.length === 0) {
+    // Case 1: No expenses at all, show welcome message
+    return (
+      <div className="summary-page-container">
+        <HamburgerMenu className="hamburger-menu" />
+        <h1 className="summary-page-title">Expense Summary</h1>
+        <div className="no-expenses-message-container">
+          <p className="no-expenses-message">
+            Start tracking your expenses efficiently! <br />
+            Add your first expense to see the summary here.
+          </p>
+        </div>
+      </div>
+    );
+  }
+  
+  if (filteredExpenses.length === 0 && expenses.length > 0) {
+    // Case 2: No expenses matching the filters
+    return (
+      <div className="summary-page-container">
+        <HamburgerMenu className="hamburger-menu" />
+        <h1 className="summary-page-title">Expense Summary</h1>
+        <div className="filter-expense-container">
+          <div className="filter-item">
+            <DateFilter 
+              onDateChange={handleDateChange} 
+              aria-label="Filter expenses by date" 
+            />
+          </div>
+          <div className="filter-item">
+            <CategoryFilter
+              categories={categories}
+              onCategoryChange={setSelectedCategories}
+              selectedCategories={selectedCategories}
+              allowMultiple={true}
+              aria-label="Filter expenses by category"  
+            />
+          </div>
+        </div>
+        <div className="no-expenses-message-container">
+          <p className="no-expenses-message">
+            No expenses match the selected filters. Please adjust the filters to see your expenses.
+          </p>
+        </div>
+      </div>
+    );
+  }
+  
 
+
+  // Case 3: Display charts and total expenses
   return (
     <div className="summary-page-container">
       <HamburgerMenu className="hamburger-menu" />
-
       <h1 className="summary-page-title">Expense Summary</h1>
 
       {/* Filters and Total Expenses in One Row */}
@@ -82,13 +131,13 @@ export default function SummaryPage() {
             categories={categories}
             onCategoryChange={setSelectedCategories}
             selectedCategories={selectedCategories}
-            allowMultiple={true}  // Enable multi-select
+            allowMultiple={true}
             aria-label="Filter expenses by category"  
           />
         </div>
 
         <div className="filter-item">
-          <h2 className="total-expenses" aria-live="polite">Total Expenses: ${totalExpenses.toFixed(2)}</h2>  {/* Announce total updates */}
+          <h2 className="total-expenses" aria-live="polite">Total Expenses: ${totalExpenses.toFixed(2)}</h2>
         </div>
       </div>
 
