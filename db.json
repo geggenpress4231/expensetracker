@@ -176,18 +176,11 @@
       "category": "Other"
     },
     {
-      "id": 1728852332705,
+      "id": "1728852332705",
       "description": "ride",
       "amount": 23,
       "date": "2024-10-14",
       "category": "Transport"
-    },
-    {
-      "id": 1728852372349,
-      "description": "plates",
-      "amount": 13,
-      "date": "2024-10-07",
-      "category": "Bills"
     }
   ]
 }

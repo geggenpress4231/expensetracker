@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { addExpense, updateExpense } from '../../actions/expenseActions';
-import { AutoComplete, Input, Button, Select, DatePicker, Form, message } from 'antd';  // Import message
+import { AutoComplete, Input, Button, Select, DatePicker, Form, message } from 'antd';  
 import moment from 'moment';
 
 export default function ExpenseForm({ onSubmit, expense }) {
@@ -46,10 +46,10 @@ export default function ExpenseForm({ onSubmit, expense }) {
 
     if (expense) {
       dispatch(updateExpense(newExpense));
-      message.success('Expense updated successfully!');  // Show success toast for update
+      message.success(`Expense "${values.description}" updated successfully!`);  // Show success toast with description for update
     } else {
       dispatch(addExpense(newExpense));
-      message.success('Expense added successfully!');  // Show success toast for adding expense
+      message.success(`Expense "${values.description}" added successfully!`);  // Show success toast with description for adding expense
     }
 
     onSubmit();  // Close the modal or any other action
@@ -154,16 +154,16 @@ export default function ExpenseForm({ onSubmit, expense }) {
           className="submit-btn"
           aria-label="Submit expense form"
           style={{
-            backgroundColor: '#1a1f71',  // Darker navy base color
+            backgroundColor: '#1a1f71',  
             borderColor: '#1a1f71',
             color: '#ffffff',
-            transition: 'background-color 0.3s ease'  // Smooth transition for color
+            transition: 'background-color 0.3s ease'  
           }}
           onMouseEnter={(e) => {
-            e.target.style.backgroundColor = '#3c4dbd';  // Lighter shade on hover
+            e.target.style.backgroundColor = '#3c4dbd'; 
           }}
           onMouseLeave={(e) => {
-            e.target.style.backgroundColor = '#1a1f71';  // Reset to original color
+            e.target.style.backgroundColor = '#1a1f71'; 
           }}
         >
           Submit

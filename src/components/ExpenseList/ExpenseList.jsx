@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteExpense, fetchExpenses } from "../../actions/expenseActions";
 import moment from 'moment';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { message } from 'antd'; // Importing AntD message for toasts
 import './ExpenseList.css';
 
 export default function ExpenseList({ onEditExpense, searchParams, selectedDateRange, selectedCategories }) {
@@ -14,11 +15,14 @@ export default function ExpenseList({ onEditExpense, searchParams, selectedDateR
       .catch((error) => console.error('Error fetching expenses:', error));
   }, [dispatch]);
 
-  const handleDelete = async (id) => {
+  // Handle delete action with toast including expense description
+  const handleDelete = async (id, description) => {
     try {
       await dispatch(deleteExpense(id));
+      message.success(`Expense "${description}" deleted successfully!`);  // Show success toast with description
     } catch (error) {
       console.error('Error deleting expense:', error);
+      message.error('Failed to delete the expense.'); // Show error toast if deletion fails
     }
   };
 
@@ -87,7 +91,7 @@ export default function ExpenseList({ onEditExpense, searchParams, selectedDateR
                   <button aria-label="Edit expense" onClick={() => onEditExpense(expense)}>
                     <FaEdit className="edit-icon" />
                   </button>
-                  <button aria-label="Delete expense" onClick={() => handleDelete(expense.id)}>
+                  <button aria-label="Delete expense" onClick={() => handleDelete(expense.id, expense.description)}>
                     <FaTrashAlt className="delete-icon" />
                   </button>
                 </td>
