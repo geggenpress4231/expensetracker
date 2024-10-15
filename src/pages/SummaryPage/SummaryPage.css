@@ -1,12 +1,9 @@
-/* Global box-sizing */
-* {
-  box-sizing: border-box;
-}
+
 
 /* Summary Page Container */
 .summary-page-container {
   max-width: 100%;
-  margin: 5vh auto;
+  margin: 2vh auto;
   padding: 2vh 4vw;
   background-color: #fff;
   border-radius: 8px;

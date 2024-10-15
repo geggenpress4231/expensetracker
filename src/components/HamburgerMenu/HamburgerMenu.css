@@ -1,7 +1,7 @@
 /* Hamburger Button Style */
 .hamburger-button {
     position: absolute;
-    top: 3.5rem; /* Relative unit */
+    top: 1.8rem; /* Relative unit */
     left: 1.25rem; /* Relative unit */
     background-color: #1a1f71; 
     border-radius: 50%;
@@ -92,8 +92,8 @@
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
     .hamburger-button {
-        top: 3rem; /* Smaller top positioning */
-        left: 1rem; /* Smaller left positioning */
+        top: 1.3rem; /* Smaller top positioning */
+        left: 0.3rem; /* Smaller left positioning */
         padding: 0.5rem; /* Smaller padding */
     }
 
@@ -113,7 +113,7 @@
 }
 @media (max-width: 480px) {
     .hamburger-button {
-        top: 2.5rem; /* Even smaller top positioning */
+        top: 0.2rem; /* Even smaller top positioning */
         left: 0.75rem; /* Smaller left positioning */
         padding: 0.375rem; /* Even smaller padding */
     }
