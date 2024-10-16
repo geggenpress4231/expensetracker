@@ -22,26 +22,33 @@
   box-sizing: border-box; 
 }
 
-/* Submit button styling */
+
 .submit-btn {
   height: 45px;
   font-size: 16px;
   border-radius: 4px;
   width: 100%;
-  background-color: #1a1f71; 
+  background-color: #1a1f71; /* Dark blue color */
   color: white; 
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease, transform 0.1s ease-in-out;
 }
 
 .submit-btn:hover {
-  background-color: #3c4dbd; 
+  background-color: #14205b; /* Darker blue on hover */
+}
+
+.submit-btn:focus {
+  background-color: #0d173d; /* Even darker blue for focus */
+  outline: none; /* Remove default focus outline */
 }
 
 .submit-btn:active {
-  background-color: #14205b; 
+  transform: scale(0.98); /* Subtle button press effect */
+  background-color: #0b1435; /* Darkest blue for active state */
 }
+
 
 .expense-form .ant-form-item-label > label {
   font-size: 14px;
