@@ -9,21 +9,30 @@ import './ExpenseList.css';
 export default function ExpenseList({ onEditExpense, searchParams, selectedDateRange, selectedCategories }) {
   const dispatch = useDispatch();
   const expenses = useSelector((state) => state.expenses.expenses);
-  const isInitialLoad = useSelector((state) => state.expenses.isInitialLoad);  // Optional: if you are tracking if this is the first load
+  const error = useSelector((state) => state.expenses.error);  // Grab error state from Redux
 
   useEffect(() => {
-    dispatch(fetchExpenses())
-      .catch((error) => console.error('Error fetching expenses:', error));
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchExpenses());
+      } catch (error) {
+        message.error('Error fetching expenses. Please try again later.');
+      }
+    };
+    fetchData();
   }, [dispatch]);
 
   // Handle delete action with toast including expense description
   const handleDelete = async (id, description) => {
     try {
       await dispatch(deleteExpense(id));
-      message.success(`Expense "${description}" deleted successfully!`);  // Show success toast with description
+      if (error) {
+        message.error(`Failed to delete expense: ${error}`);  // Display error message if delete fails
+      } else {
+        message.success(`Expense "${description}" deleted successfully!`);  // Show success toast with description
+      }
     } catch (error) {
-      console.error('Error deleting expense:', error);
-      message.error('Failed to delete the expense.'); // Show error toast if deletion fails
+      message.error('An unexpected error occurred while trying to delete the expense.');
     }
   };
 
