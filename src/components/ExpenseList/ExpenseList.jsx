@@ -25,16 +25,20 @@ export default function ExpenseList({ onEditExpense, searchParams, selectedDateR
   // Handle delete action with toast including expense description
   const handleDelete = async (id, description) => {
     try {
-      await dispatch(deleteExpense(id));
-      if (error) {
-        message.error(`Failed to delete expense: ${error}`);  // Display error message if delete fails
+      const response = await dispatch(deleteExpense(id));   
+  
+      // Check if the action was successful before showing the success message
+      if (response && response.error) {
+        message.error(`Failed to delete the expense: ${response.error.message}`);
       } else {
-        message.success(`Expense "${description}" deleted successfully!`);  // Show success toast with description
+        message.success(`Expense "${description}" deleted successfully!`);
       }
     } catch (error) {
-      message.error('An unexpected error occurred while trying to delete the expense.');
+      console.error('Error deleting expense:', error);
+      message.error('Failed to delete the expense.'); // Show error toast if deletion fails
     }
   };
+  
 
   const matchesDateRange = (expenseDate) => {
     if (!selectedDateRange || (selectedDateRange[0] === null && selectedDateRange[1] === null)) {

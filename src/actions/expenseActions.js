@@ -66,10 +66,9 @@ export const deleteExpense = (id) => async (dispatch) => {
       type: DELETE_EXPENSE,
       payload: id,
     });
+    return { success: true };  // Return success status
   } catch (error) {
-    dispatch({
-      type: DELETE_EXPENSE_ERROR,
-      payload: error.message,  // Dispatch error message on failure
-    });
+    console.error('Error deleting expense:', error);
+    return { error };  // Return the error if the request fails
   }
 };
