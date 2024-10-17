@@ -1,18 +1,32 @@
-// actions/expenseActions.js
 import axios from 'axios';
-import { ADD_EXPENSE, UPDATE_EXPENSE, DELETE_EXPENSE, FETCH_EXPENSES } from './actionTypes';
+import { 
+  ADD_EXPENSE, 
+  UPDATE_EXPENSE, 
+  DELETE_EXPENSE, 
+  FETCH_EXPENSES, 
+  FETCH_EXPENSES_ERROR, 
+  ADD_EXPENSE_ERROR, 
+  UPDATE_EXPENSE_ERROR, 
+  DELETE_EXPENSE_ERROR 
+} from './actionTypes';
 
+// Fetch Expenses
 export const fetchExpenses = () => async (dispatch) => {
   try {
-    const response = await axios.get('http://localhost:5000/expenses');  
+    const response = await axios.get('http://localhost:5000/expenses');
     dispatch({
       type: FETCH_EXPENSES,
-      payload: response.data,  
+      payload: response.data,
     });
   } catch (error) {
-    console.error('Error fetching expenses:', error);
+    dispatch({
+      type: FETCH_EXPENSES_ERROR,
+      payload: error.message,  // Dispatch error message on failure
+    });
   }
 };
+
+// Add Expense
 export const addExpense = (newExpense) => async (dispatch) => {
   try {
     const response = await axios.post('http://localhost:5000/expenses', newExpense);
@@ -21,25 +35,30 @@ export const addExpense = (newExpense) => async (dispatch) => {
       payload: response.data,
     });
   } catch (error) {
-    console.error('Error adding expense:', error);
+    dispatch({
+      type: ADD_EXPENSE_ERROR,
+      payload: error.message,  // Dispatch error message on failure
+    });
   }
 };
 
+// Update Expense
 export const updateExpense = (updatedExpense) => async (dispatch) => {
   try {
-    await axios.put(`http://localhost:5000/expenses/${updatedExpense.id}`, updatedExpense);
+    const response = await axios.put(`http://localhost:5000/expenses/${updatedExpense.id}`, updatedExpense);
     dispatch({
       type: UPDATE_EXPENSE,
       payload: updatedExpense,
     });
   } catch (error) {
-    console.error('Error updating expense:', error);
+    dispatch({
+      type: UPDATE_EXPENSE_ERROR,
+      payload: error.message,  // Dispatch error message on failure
+    });
   }
 };
 
-
-
-
+// Delete Expense
 export const deleteExpense = (id) => async (dispatch) => {
   try {
     await axios.delete(`http://localhost:5000/expenses/${id}`);
@@ -48,6 +67,9 @@ export const deleteExpense = (id) => async (dispatch) => {
       payload: id,
     });
   } catch (error) {
-    console.error('Error deleting expense:', error);
+    dispatch({
+      type: DELETE_EXPENSE_ERROR,
+      payload: error.message,  // Dispatch error message on failure
+    });
   }
 };

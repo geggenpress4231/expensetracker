@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addExpense, updateExpense } from '../../actions/expenseActions';
 import { AutoComplete, Input, Button, Select, DatePicker, Form, message } from 'antd';  
 import moment from 'moment';
@@ -10,6 +10,9 @@ export default function ExpenseForm({ onSubmit, expense }) {
   const [suggestions, setSuggestions] = useState([]);
   const LOCAL_STORAGE_KEY = 'expenseDescriptions';
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+  
+  // Fetch error state from the Redux store
+  const error = useSelector((state) => state.expenses.error);
 
   useEffect(() => {
     const savedDescriptions = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
@@ -29,7 +32,7 @@ export default function ExpenseForm({ onSubmit, expense }) {
     }
   }, [expense, form]);
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     const newExpense = {
       id: expense ? expense.id : Date.now(),
       description: values.description,
@@ -44,15 +47,26 @@ export default function ExpenseForm({ onSubmit, expense }) {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedDescriptions));
     }
 
-    if (expense) {
-      dispatch(updateExpense(newExpense));
-      message.success(`Expense "${values.description}" updated successfully!`);  // Show success toast with description for update
-    } else {
-      dispatch(addExpense(newExpense));
-      message.success(`Expense "${values.description}" added successfully!`);  // Show success toast with description for adding expense
+    try {
+      if (expense) {
+        await dispatch(updateExpense(newExpense));  // Dispatch the update action
+      } else {
+        await dispatch(addExpense(newExpense));  // Dispatch the add action
+      }
+      
+      // Check for errors in the Redux state after the dispatch
+      if (error) {
+        message.error(`Failed to process the expense: ${error}`);  // Show error toast from Redux state
+      } else {
+        message.success(
+          `Expense "${values.description}" ${expense ? 'updated' : 'added'} successfully!`
+        );
+        onSubmit();  // Close the modal or any other action
+      }
+    } catch (err) {
+      // Catch any unexpected errors
+      message.error('An error occurred. Please try again later.');
     }
-
-    onSubmit();  // Close the modal or any other action
   };
 
   const handleSearch = (searchText) => {
@@ -147,18 +161,16 @@ export default function ExpenseForm({ onSubmit, expense }) {
       </Form.Item>
 
       <Form.Item>
-  <Button
-    type="primary"
-    htmlType="submit"
-    block
-    className="submit-btn"
-    aria-label="Submit expense form"
-  >
-    Submit
-  </Button>
-</Form.Item>
-
-
+        <Button
+          type="primary"
+          htmlType="submit"
+          block
+          className="submit-btn"
+          aria-label="Submit expense form"
+        >
+          Submit
+        </Button>
+      </Form.Item>
     </Form>
   );
 }
