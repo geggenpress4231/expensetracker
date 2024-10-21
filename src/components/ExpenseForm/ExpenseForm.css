@@ -4,7 +4,8 @@
   padding: 20px;
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+  text-align: center;
 }
 
 .expense-form .ant-form-item {
@@ -14,21 +15,24 @@
 .expense-form input, 
 .expense-form .ant-select-selector, 
 .expense-form .ant-picker {
-  height: 45px;
-  font-size: 16px;
-  padding: 10px;
+  height: 40px;
+  font-size: 14px;
+  padding: 8px;
   border-radius: 4px;
   width: 100%; 
-  box-sizing: border-box; 
+  box-sizing: border-box;
+  text-align: left;
 }
 
-
 .submit-btn {
-  height: 45px;
-  font-size: 16px;
+  height: 38px;
+  font-size: 14px;
+  padding: 0 12px;
   border-radius: 4px;
   width: 100%;
-  background-color: #1a1f71; /* Dark blue color */
+  max-width: 250px; 
+  margin: 20px auto 0;
+  background-color: #1a1f71;
   color: white; 
   border: none;
   cursor: pointer;
@@ -36,19 +40,18 @@
 }
 
 .submit-btn:hover {
-  background-color: #14205b; /* Darker blue on hover */
+  background-color: #14205b;
 }
 
 .submit-btn:focus {
-  background-color: #0d173d; /* Even darker blue for focus */
-  outline: none; /* Remove default focus outline */
+  background-color: #0d173d;
+  outline: none;
 }
 
 .submit-btn:active {
-  transform: scale(0.98); /* Subtle button press effect */
-  background-color: #0b1435; /* Darkest blue for active state */
+  transform: scale(0.98);
+  background-color: #0b1435;
 }
-
 
 .expense-form .ant-form-item-label > label {
   font-size: 14px;
@@ -61,14 +64,12 @@
   color: #ff4d4f;
 }
 
-/* Style for AutoComplete dropdown */
 .expense-form .ant-select-dropdown {
   background-color: #333;
   color: #fff;
   font-size: 8px;
 }
 
-/* Media Queries for responsiveness */
 @media (min-width: 768px) {
   .expense-form {
     max-width: 600px; 
@@ -78,5 +79,11 @@
 @media (max-width: 480px) {
   .expense-form {
     padding: 15px; 
+  }
+
+  .submit-btn {
+    height: 34px;
+    font-size: 13px;
+    max-width: 100%; 
   }
 }

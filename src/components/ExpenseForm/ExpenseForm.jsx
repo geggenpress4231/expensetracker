@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addExpense, updateExpense } from '../../actions/expenseActions';
 import { AutoComplete, Input, Button, Select, DatePicker, Form, message } from 'antd';  
 import moment from 'moment';
+import './ExpenseForm.css'
 
 export default function ExpenseForm({ onSubmit, expense }) {
   const dispatch = useDispatch();
